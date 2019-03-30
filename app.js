@@ -6,14 +6,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const width = 9
   const gameGrid = document.querySelector('.gameGrid')
   const squares = []
-  let aliens = [0,1,2,3,4,5,6,7,9,10,11,12,13,14,15,16,18,19,20,21,22,23,24,25] // 8 x 3 grid, specific index values of grid
+  // 8 x 3 grid, specific index values of grid
+  let aliens = [0,1,2,3,4,5,6,7,9,10,11,12,13,14,15,16,18,19,20,21,22,23,24,25]
   // const moves = [1, 9, -1, 9]
   // let moveIndex = 0
   let gamePlay = true
-  // let gamePlay = false
-  // const aliensWidth = 8;
-  // const aliensHeight = 3;
-  let playerIndex = 78
+  let playerIndex = 76
+  let fireIndex = playerIndex - width
 
   // make grid
   for(let i = 0; i < width * width; i++) {
@@ -30,14 +29,6 @@ document.addEventListener('DOMContentLoaded', () => {
   makeAliens()
 
   function moveAliens(dir) {
-    // const alienIndex = aliens[i]
-    // const alienIndex = aliens.forEach(alien => squares[alien])
-    // const alienIndex = aliens.forEach(alien => {
-    //   aliens[alien]
-    //   if (aliens[alien] === 70) {
-    //     gamePlay = false
-    //   }
-    // })
     const lastAlien = aliens[23]
     // if (gamePlay === true) {
     if (gamePlay === true && lastAlien <= 70) {
@@ -47,18 +38,34 @@ document.addEventListener('DOMContentLoaded', () => {
       aliens = aliens.map(alien => alien + dir)
 
       makeAliens()
-      // // if aliensIndex is on the bottom row, dont move any more
-      // // if alienIndex = 73 => gamePlay = false
-      // if (aliens + width > width * width) {
-      //   gamePlay = false
     }
   }
 
+  // set player on grid
+  squares[playerIndex].classList.add('player')
+
+  function movePlayer() {
+  // find square with the class of player
+    const player = squares.find(square => square.classList.contains('player'))
+    // remove the class of player from the square
+    player.classList.remove('player')
+
+    // add player class to square the player should move
+    squares[playerIndex].classList.add('player')
+  }
+
   function fire() {
+    const fireIndex = playerIndex - width
+    // find sqaure with class of fire
+    const fire = squares.find(square => square.classList.contains('fire'))
+    // remove class from square
+    fire.classList.remove('fire')
+    // fireIndex.classList.add('fire')
+    squares[fireIndex].classList.add('fire')
 
   }
 
-  // setInterval(() => {
+// setInterval(() => {
   //   timesMoved++
   //   moveIndex = moveIndex === 3 ? 0 : moveIndex + 1
   //   moveAliens([moves[moveIndex]])
@@ -74,22 +81,9 @@ document.addEventListener('DOMContentLoaded', () => {
     else if(timesMoved % 8 === 1 || timesMoved % 8 === 5) moveAliens(+1)
     // move aliens left
     else if(timesMoved % 8 === 3 || timesMoved % 8 === 7) moveAliens(-1)
-    // stop aliens at the bottom
-    else if(timesMoved === 13) gamePlay = false
+    // set firing on an interval
+    // else if()
   }, 750)
-
-  // set player on grid
-  squares[playerIndex].classList.add('player')
-
-  function movePlayer() {
-  // find square with the class of player
-    const player = squares.find(square => square.classList.contains('player'))
-    // remove the class of player from the square
-    player.classList.remove('player')
-
-    // add player class to square the player should move
-    squares[playerIndex].classList.add('player')
-  }
 
   document.addEventListener('keydown', (e) => {
     switch(e.keyCode) {
@@ -109,13 +103,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         break
 
-      // case 38:
-      // // up
-      //   if(playerIndex - width >= 0) {
-      //     playerIndex -= width
-      //     fire()
-      //   }
-      //   break
+      case 38:
+      // up
+        while(fireIndex - width >= 0) {
+          fireIndex -= width
+          fire()
+        }
+        break
     }
 
   })

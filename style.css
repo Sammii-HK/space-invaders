@@ -53,13 +53,13 @@ h1 {
 .player {
   background-image: url('images/sprite-sheet.png');
   background-size: 835px;
-  background-position-x: -423px;
+  background-position-x: -424px;
   background-position-y: -50px;
 }
 
 .fire {
   background-image: url('images/sprite-sheet.png');
   background-size: 835px;
-  background-position-x: -423px;
-  background-position-y: -50px;
+  background-position-x: -620px;
+  background-position-y: -126px;
 }
