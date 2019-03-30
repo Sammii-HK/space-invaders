@@ -47,12 +47,19 @@ h1 {
   background-image: url('images/sprite-sheet.png');
   background-size: 835px;
   background-position-x: -220px;
-  background-position-y: -42px;
+  background-position-y: -50px;
 }
 
 .player {
   background-image: url('images/sprite-sheet.png');
   background-size: 835px;
   background-position-x: -423px;
-  background-position-y: -42px;
+  background-position-y: -50px;
+}
+
+.fire {
+  background-image: url('images/sprite-sheet.png');
+  background-size: 835px;
+  background-position-x: -423px;
+  background-position-y: -50px;
 }

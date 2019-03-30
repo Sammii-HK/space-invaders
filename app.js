@@ -55,8 +55,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function fire() {
-    const fireIndex = squares[playerIndex - width]
-    fireIndex.classList.add('fire')
 
   }
 
@@ -76,6 +74,8 @@ document.addEventListener('DOMContentLoaded', () => {
     else if(timesMoved % 8 === 1 || timesMoved % 8 === 5) moveAliens(+1)
     // move aliens left
     else if(timesMoved % 8 === 3 || timesMoved % 8 === 7) moveAliens(-1)
+    // stop aliens at the bottom
+    else if(timesMoved === 13) gamePlay = false
   }, 750)
 
   // set player on grid
@@ -109,13 +109,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         break
 
-      case 38:
-      // up
-        // if(playerIndex - width >= 0) {
-        //   playerIndex -= width
-        fire()
-        // }
-        break
+      // case 38:
+      // // up
+      //   if(playerIndex - width >= 0) {
+      //     playerIndex -= width
+      //     fire()
+      //   }
+      //   break
     }
 
   })
