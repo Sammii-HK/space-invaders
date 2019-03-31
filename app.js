@@ -22,6 +22,8 @@ document.addEventListener('DOMContentLoaded', () => {
   let fireIndex = playerIndex - width
   console.log('fireIndex', fireIndex)
 
+  const intervalId = 0
+
   // make grid
   for(let i = 0; i < width * width; i++) {
     const square = document.createElement('div')
@@ -78,6 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       if(fireIndex < 9 || fireIndex < 71) {
         squares[fireIndex].classList.remove('fire')
+        clearInterval(intervalId)
       }
     }, 750)
   }
