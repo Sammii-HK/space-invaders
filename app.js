@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // const moves = [1, 9, -1, 9]
   // let moveIndex = 0
 
-  let gamePlay = true
+  const gamePlay = true
 
   let playerIndex = 76
   let fireIndex = playerIndex - width
@@ -28,6 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
     squares.push(square)
     gameGrid.appendChild(square)
   }
+
   // --  Move function to event listener on reset button click when working  --
   // make aliens fill a portion of the grid
   function makeAliens() {
@@ -62,37 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
     squares[playerIndex].classList.add('player')
   }
 
-  // gamePlay = false
-  // function fire() {
-  //   setInterval(() => {
-  //     // squares[fireIndex].classList.add('fire')
-  //     // find sqaure with class of fire
-  //     const fire = squares.find(square => square.classList.contains('fire'))
-  //     // remove class from square
-  //     fire.classList.remove('fire')
-  //
-  //     // add fire class to square in row above
-  //     squares[fireIndex].classList.add('fire')
-  //   }, 750)
-  // }
   function moveBullet() {
-    // squares[fireIndex].classList.add('fire')
-    // find sqaure with class of fire
-    // const firePosition = squares.find(square => square.classList.contains('fire'))
-    // const firePosition = squares.indexOf('fireIndex')
-    // remove class from square
-    // firePosition.classList.remove('fire')
-    // squares[fireIndex].classList.remove('fire')
-    // while(fireIndex - width >= 0) {
-    // fireIndex.classList.remove('fire')
-    // fireIndex -= width
-    // // add fire class to square in row above
-    // // squares[fireIndex].classList.add('fire')
-    // fireIndex.classList.add('fire')
-
-    // while(gamePlay === true) {
-    // find square with the class of player
-
     setInterval(() => {
       while(fireIndex - width >= 0) {
         const bulletPos = squares.find(square => square.classList.contains('fire'))
@@ -122,8 +93,6 @@ document.addEventListener('DOMContentLoaded', () => {
     else if(timesMoved % 8 === 1 || timesMoved % 8 === 5) moveAliens(+1)
     // move aliens left
     else if(timesMoved % 8 === 3 || timesMoved % 8 === 7) moveAliens(-1)
-    // set firing on an interval
-    // else if(gamePlay === true) fire()
   }, 750)
 
   document.addEventListener('keydown', (e) => {
@@ -144,19 +113,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         break
 
-      // case 38:
-      // // up
-      //   while(fireIndex - width >= 0) {
-      //     setInterval(() => {
-      //       fireIndex -= width
-      //       fire()
-      //     }, 750)
-      //   }
-      //   break
-      //
       case 38:
       // up
-        if(gamePlay = true) {
+        if(gamePlay === true) {
           fireIndex = playerIndex - width
           // while(fireIndex - width >= 0) {
           squares[fireIndex].classList.add('fire')
@@ -167,7 +126,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
   })
-  // setInterval(fire(), 750)
 
 
 
@@ -180,7 +138,8 @@ document.addEventListener('DOMContentLoaded', () => {
 // --run aliens move() at set interval
 // --make turretMove() function
 // --make gunFire() function
-// run gunFire() function at set interval (*within a key down listener*)
+// --run gunFire() function at set interval (*within a key down listener*)
 // --create keydown addEventListener for left, right and fire!
+// ability to fire multiple bullets
 // if bullet hits alien, remove class from both function
 // set game conditions
