@@ -76,6 +76,9 @@ document.addEventListener('DOMContentLoaded', () => {
         squares[fireIndex].classList.add('fire')
         return fireIndex
       }
+      if(fireIndex < 9 || fireIndex < 71) {
+        squares[fireIndex].classList.remove('fire')
+      }
     }, 750)
   }
 
