@@ -6,11 +6,15 @@ document.addEventListener('DOMContentLoaded', () => {
   const width = 9
   const gameGrid = document.querySelector('.gameGrid')
   const squares = []
+
   // 8 x 3 grid, specific index values of grid
   let aliens = [0,1,2,3,4,5,6,7,9,10,11,12,13,14,15,16,18,19,20,21,22,23,24,25]
+
   // const moves = [1, 9, -1, 9]
   // let moveIndex = 0
+
   let gamePlay = true
+
   let playerIndex = 76
   let fireIndex = playerIndex - width
 
@@ -54,13 +58,27 @@ document.addEventListener('DOMContentLoaded', () => {
     squares[playerIndex].classList.add('player')
   }
 
+  // gamePlay = false
+  // function fire() {
+  //   setInterval(() => {
+  //     // squares[fireIndex].classList.add('fire')
+  //     // find sqaure with class of fire
+  //     const fire = squares.find(square => square.classList.contains('fire'))
+  //     // remove class from square
+  //     fire.classList.remove('fire')
+  //
+  //     // add fire class to square in row above
+  //     squares[fireIndex].classList.add('fire')
+  //   }, 750)
+  // }
   function fire() {
-    const fireIndex = playerIndex - width
+    // squares[fireIndex].classList.add('fire')
     // find sqaure with class of fire
     const fire = squares.find(square => square.classList.contains('fire'))
     // remove class from square
     fire.classList.remove('fire')
-    // fireIndex.classList.add('fire')
+
+    // add fire class to square in row above
     squares[fireIndex].classList.add('fire')
 
   }
@@ -71,8 +89,6 @@ document.addEventListener('DOMContentLoaded', () => {
   //   moveAliens([moves[moveIndex]])
   // }, 750)
 
-  // setTimeout(, 5000)
-
   setInterval(() => {
     timesMoved++
     // move aliens down
@@ -82,7 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // move aliens left
     else if(timesMoved % 8 === 3 || timesMoved % 8 === 7) moveAliens(-1)
     // set firing on an interval
-    // else if()
+    else if(gamePlay === true) fire()
   }, 750)
 
   document.addEventListener('keydown', (e) => {
@@ -103,9 +119,21 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         break
 
+      // case 38:
+      // // up
+      //   while(fireIndex - width >= 0) {
+      //     setInterval(() => {
+      //       fireIndex -= width
+      //       fire()
+      //     }, 750)
+      //   }
+      //   break
+      //
       case 38:
       // up
         while(fireIndex - width >= 0) {
+          squares[fireIndex].classList.add('fire')
+          // fire()
           fireIndex -= width
           fire()
         }
@@ -113,6 +141,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
   })
+  // setInterval(fire(), 750)
+
 
 
 })
