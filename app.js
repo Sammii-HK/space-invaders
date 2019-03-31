@@ -7,6 +7,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const gameGrid = document.querySelector('.gameGrid')
   const squares = []
 
+  // const timer = 0
+  // let score = 0
+
   // 8 x 3 grid, specific index values of grid
   let aliens = [0,1,2,3,4,5,6,7,9,10,11,12,13,14,15,16,18,19,20,21,22,23,24,25]
 
@@ -17,6 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let playerIndex = 76
   let fireIndex = playerIndex - width
+  console.log('fireIndex', fireIndex)
 
   // make grid
   for(let i = 0; i < width * width; i++) {
@@ -49,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
   squares[playerIndex].classList.add('player')
 
   function movePlayer() {
-  // find square with the class of player
+    // find square with the class of player
     const player = squares.find(square => square.classList.contains('player'))
     // remove the class of player from the square
     player.classList.remove('player')
@@ -71,18 +75,37 @@ document.addEventListener('DOMContentLoaded', () => {
   //     squares[fireIndex].classList.add('fire')
   //   }, 750)
   // }
-  function fire(fireIndex) {
+  function moveBullet() {
     // squares[fireIndex].classList.add('fire')
     // find sqaure with class of fire
     // const firePosition = squares.find(square => square.classList.contains('fire'))
-    const firePosition = squares.indexOf('fireIndex')
+    // const firePosition = squares.indexOf('fireIndex')
     // remove class from square
-    firePosition.classList.remove('fire')
+    // firePosition.classList.remove('fire')
     // squares[fireIndex].classList.remove('fire')
+    // while(fireIndex - width >= 0) {
     // fireIndex.classList.remove('fire')
-    fireIndex - width
-    // add fire class to square in row above
-    squares[fireIndex].classList.add('fire')
+    // fireIndex -= width
+    // // add fire class to square in row above
+    // // squares[fireIndex].classList.add('fire')
+    // fireIndex.classList.add('fire')
+
+    // while(gamePlay === true) {
+    // find square with the class of player
+
+    setInterval(() => {
+      while(fireIndex - width >= 0) {
+        const bulletPos = squares.find(square => square.classList.contains('fire'))
+        // remove the class of fire from the square
+        bulletPos.classList.remove('fire')
+        // move up one row
+        fireIndex -= width
+        console.log('fireIndex', fireIndex)
+        // add fire class to square the fire should move
+        squares[fireIndex].classList.add('fire')
+        return fireIndex
+      }
+    }, 750)
   }
 
   // setInterval(() => {
@@ -133,11 +156,12 @@ document.addEventListener('DOMContentLoaded', () => {
       //
       case 38:
       // up
-        while(fireIndex - width >= 0) {
+        if(gamePlay = true) {
+          fireIndex = playerIndex - width
+          // while(fireIndex - width >= 0) {
           squares[fireIndex].classList.add('fire')
-          // fire()
-          fireIndex -= width
-          fire()
+          // setInterval(moveBullet(), 750)
+          moveBullet()
         }
         break
     }
