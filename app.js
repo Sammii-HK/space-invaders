@@ -8,8 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const squares = []
 
   const timerDisplay = document.querySelector('.time')
-  // const timer = 0
-  // let score = 0
+  let timer = 0
+  let score = 0
 
   // 8 x 3 grid, specific index values of grid
   let aliens = [0,1,2,3,4,5,6,7,9,10,11,12,13,14,15,16,18,19,20,21,22,23,24,25]
@@ -20,10 +20,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const gamePlay = true
 
   let playerIndex = 76
-  let fireIndex = playerIndex - width
-  console.log('fireIndex', fireIndex)
+  // let fireIndex = playerIndex - width
+  // console.log('fireIndex', fireIndex)
 
-  const intervalId = 0
+  // let intervalId = 0
 
   // make grid
   for(let i = 0; i < width * width; i++) {
@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
   makeAliens()
 
   function moveAliens(dir) {
-    const lastAlien = aliens[23]
+    const lastAlien = aliens[aliens.length-1]
     // if (gamePlay === true) {
     if (gamePlay === true && lastAlien <= 70) {
       // remove the classes from the aliens
@@ -66,24 +66,50 @@ document.addEventListener('DOMContentLoaded', () => {
     squares[playerIndex].classList.add('player')
   }
 
-  function moveBullet() {
-    setInterval(() => {
-      while(fireIndex - width >= 0) {
-        const bulletPos = squares.find(square => square.classList.contains('fire'))
-        // remove the class of fire from the square
-        bulletPos.classList.remove('fire')
-        // move up one row
-        fireIndex -= width
-        console.log('fireIndex', fireIndex)
-        // add fire class to square the fire should move
-        squares[fireIndex].classList.add('fire')
-        return fireIndex
+  function moveBullet(fireIndex) {
+    // let fireIndex = playerIndex - width
+    const intervalId = setInterval(() => {
+
+      // remove the class of fire from the square
+      squares[fireIndex].classList.remove('fire')
+      // move up one row
+      fireIndex -= width
+
+      // if fireIndex is outside of sqaures array
+      if(!squares[fireIndex]) {
+        clearInterval(intervalId)
+        return false
       }
-      if(fireIndex < 9 || fireIndex < 71) {
+
+
+      // if you've hit an alien...
+      if(squares[fireIndex].classList.contains('alien1')) {
+        // console.log(squares[fireIndex].classList.contains('alien1'))
+        // clear the interval for the bullet
+        clearInterval(intervalId)
+
+        // remove bullet class
         squares[fireIndex].classList.remove('fire')
-        // clearInterval(intervalId)
+
+        // remove alien class
+        squares[fireIndex].classList.remove('alien1')
+        console.log('squares[fireIndex]', squares[fireIndex])
+        fireIndex -= width
+
+        // splice the index from the alien array
+        // aliens.splice(fireIndex, 1)
+        aliens.splice(squares[fireIndex], 1)
+
+        // increment points
+        score =+ 10
       }
-    }, 750)
+
+
+      // add fire class to square the fire should move
+      if(squares[fireIndex]) {
+        squares[fireIndex].classList.add('fire')
+      }
+    }, 10)
   }
 
   // setInterval(() => {
@@ -93,6 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // }, 750)
 
   setInterval(() => {
+    console.log('aliens moving')
     timesMoved++
     // move aliens down
     if(timesMoved % 2 === 0) moveAliens(+9)
@@ -103,13 +130,15 @@ document.addEventListener('DOMContentLoaded', () => {
   }, 750)
 
   function displayTime() {
-    // timer ++
-    // timerDisplay.innerText = timer
+    // set timer count to screen
+    timerDisplay.innerText = timer
+    // adds one to timer count
+    timer ++
     // get the current time
-    const currentTime = new Date()
+    // const currentTime = new Date()
     // currentTime.getSeconds()
     // set the clock face innerText to be the current time
-    timerDisplay.innerText = currentTime.toLocaleTimeString()
+    // timerDisplay.innerText = currentTime.toLocaleTimeString()
   }
 
   displayTime()
@@ -139,12 +168,10 @@ document.addEventListener('DOMContentLoaded', () => {
       case 38:
       // up
         if(gamePlay === true) {
-          fireIndex = playerIndex - width
-          // while(fireIndex - width >= 0) {
+          const fireIndex = playerIndex - width
+          console.log(fireIndex, 'fire index')
           squares[fireIndex].classList.add('fire')
-          // setInterval(moveBullet(), 750)
-          moveBullet()
-          clearInterval(intervalId)
+          moveBullet(fireIndex)
         }
         break
     }
