@@ -31,6 +31,22 @@ document.addEventListener('DOMContentLoaded', () => {
     gameGrid.appendChild(square)
   }
 
+  function displayTime() {
+    // set timer count to screen
+    timerDisplay.innerText = timer
+    // adds one to timer count
+    timer ++
+  }
+
+  displayTime()
+  let timerId = 2
+  // =====  EVERY SECOND (1000 ms)  =====
+  if(gamePlay === true) {
+    timerId = setInterval(displayTime, 1000)
+  } else if (gamePlay === false) {
+    clearInterval(timerId)
+  }
+
   // --  Move function to event listener on reset button click when working  --
   // make aliens fill a portion of the grid
   function makeAliens() {
@@ -55,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const lastAlien = aliens[aliens.length-1]
     if(lastAlien > 63) {
       clearInterval(alienIntervalId)
-
+      clearInterval(timerId)
       gamePlay = false
     }
   }
@@ -155,20 +171,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
     }, 10)
-  }
-
-  function displayTime() {
-    // set timer count to screen
-    timerDisplay.innerText = timer
-    // adds one to timer count
-    timer ++
-  }
-
-  displayTime()
-
-  // =====  EVERY SECOND (1000 ms)  =====
-  if(gamePlay === true) {
-    setInterval(displayTime, 1000)
   }
 
   document.addEventListener('keydown', (e) => {
