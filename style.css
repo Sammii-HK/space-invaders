@@ -63,3 +63,8 @@ h1 {
   background-position-x: -620px;
   background-position-y: -126px;
 }
+
+.userMessage {
+  margin-top: 250px;
+  font-size: 20px;
+}

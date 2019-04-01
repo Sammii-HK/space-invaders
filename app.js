@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let timesMoved = 0
   let gamePlay = true
   let playerIndex = 76
+  let currentStep = 0
 
 
   // make grid
@@ -54,15 +55,20 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   makeAliens()
 
+  aliens.forEach(alien => squares[alien].setAttribute('data-step', currentStep))
+
   // --  Move function to event listener on reset button click when working  --
   // !!move aliens
   function moveAliens(dir) {
+    currentStep = currentStep === 1 ? 0 : currentStep + 1
     if (gamePlay === true) {
       // remove the classes from the aliens
       aliens.forEach(alien => squares[alien].classList.remove('alien1'))
       // add 1 to each index
       aliens = aliens.map(alien => alien + dir)
       makeAliens()
+      // update current step for styling
+      aliens.forEach(alien => squares[alien].setAttribute('data-step', currentStep))
     }
 
     // stop aliens from leaving the board
