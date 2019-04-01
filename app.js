@@ -38,7 +38,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // adds one to timer count
     timer ++
   }
-
   displayTime()
 
   // =====  EVERY SECOND (1000 ms)  =====
@@ -151,10 +150,8 @@ document.addEventListener('DOMContentLoaded', () => {
         // console.log('squares[fireIndex]', squares[fireIndex])
         fireIndex -= width
         // increment points
-        console.log('score 1', score)
         score += 10
         scoreDisplay.innerText = score
-        console.log('score2', score)
 
         // !!game win condition
         if (aliens.length === 0) {
@@ -199,7 +196,6 @@ document.addEventListener('DOMContentLoaded', () => {
       // up
         if(gamePlay === true) {
           const fireIndex = playerIndex - width
-          console.log(fireIndex, 'fire index')
           squares[fireIndex].classList.add('fire')
           moveBullet(fireIndex)
         }
