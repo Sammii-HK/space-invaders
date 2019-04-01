@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const timerDisplay = document.querySelector('.time')
   let timer = 0
+  const scoreDisplay = document.querySelector('.score')
   let score = 0
 
   // 8 x 3 grid, specific index values of grid
@@ -17,13 +18,11 @@ document.addEventListener('DOMContentLoaded', () => {
   // const moves = [1, 9, -1, 9]
   // let moveIndex = 0
 
-  const gamePlay = true
+  let gamePlay = true
 
   let playerIndex = 76
-  // let fireIndex = playerIndex - width
-  // console.log('fireIndex', fireIndex)
 
-  // let intervalId = 0
+  const userMessage = document.querySelector('.userMessage')
 
   // make grid
   for(let i = 0; i < width * width; i++) {
@@ -40,10 +39,10 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   makeAliens()
 
+  // let alienIntervalId = 1
+
   function moveAliens(dir) {
-    const lastAlien = aliens[aliens.length-1]
-    // if (gamePlay === true) {
-    if (gamePlay === true && lastAlien <= 70) {
+    if (gamePlay === true) {
       // remove the classes from the aliens
       aliens.forEach(alien => squares[alien].classList.remove('alien1'))
       // add 1 to each index
@@ -51,7 +50,37 @@ document.addEventListener('DOMContentLoaded', () => {
 
       makeAliens()
     }
+
+    // stop aliens from leaving the board
+    const lastAlien = aliens[aliens.length-1]
+    if(lastAlien > 63) {
+      clearInterval(alienIntervalId)
+
+      gamePlay = false
+    }
   }
+
+// setInterval(() => {
+  //   timesMoved++
+  //   moveIndex = moveIndex === 3 ? 0 : moveIndex + 1
+  //   moveAliens([moves[moveIndex]])
+  // }, 750)
+
+  const alienIntervalId = setInterval(() => {
+    console.log('aliens moving')
+    timesMoved++
+    // move aliens down
+    if(timesMoved % 2 === 0) moveAliens(+9)
+    // move aliens right
+    else if(timesMoved % 8 === 1 || timesMoved % 8 === 5) moveAliens(+1)
+    // move aliens left
+    else if(timesMoved % 8 === 3 || timesMoved % 8 === 7) moveAliens(-1)
+
+    if (aliens[aliens.length-1] > 63) {
+      // game over
+      userMessage.innerText = 'GAME OVER'
+    }
+  }, 750)
 
   // set player on grid
   squares[playerIndex].classList.add('player')
@@ -68,16 +97,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function moveBullet(fireIndex) {
     // let fireIndex = playerIndex - width
-    const intervalId = setInterval(() => {
+    const bulletIntervalId = setInterval(() => {
 
       // remove the class of fire from the square
       squares[fireIndex].classList.remove('fire')
+
       // move up one row
       fireIndex -= width
 
+      // add fire class to square the fire should move
+      if(squares[fireIndex]) {
+        squares[fireIndex].classList.add('fire')
+      }
+
+
       // if fireIndex is outside of sqaures array
       if(!squares[fireIndex]) {
-        clearInterval(intervalId)
+        clearInterval(bulletIntervalId)
         return false
       }
 
@@ -85,67 +121,55 @@ document.addEventListener('DOMContentLoaded', () => {
       // if you've hit an alien...
       if(squares[fireIndex].classList.contains('alien1')) {
         // console.log(squares[fireIndex].classList.contains('alien1'))
+
         // clear the interval for the bullet
-        clearInterval(intervalId)
+        clearInterval(bulletIntervalId)
+
+        const alienIndex = aliens.indexOf(fireIndex)
+
+        // splice the index from the alien array
+        aliens.splice(alienIndex, 1)
 
         // remove bullet class
         squares[fireIndex].classList.remove('fire')
 
         // remove alien class
         squares[fireIndex].classList.remove('alien1')
-        console.log('squares[fireIndex]', squares[fireIndex])
+        // console.log('squares[fireIndex]', squares[fireIndex])
         fireIndex -= width
 
-        // splice the index from the alien array
-        // aliens.splice(fireIndex, 1)
-        aliens.splice(squares[fireIndex], 1)
+        console.log(aliens)
 
         // increment points
-        score =+ 10
+        console.log('score 1', score)
+        score += 10
+        scoreDisplay.innerText = score
+        console.log('score2', score)
+
+        // game conditions
+        if (aliens.length === 0) {
+          // game won
+          gamePlay = false
+          userMessage.innerText = 'You won!'
+        }
       }
 
-
-      // add fire class to square the fire should move
-      if(squares[fireIndex]) {
-        squares[fireIndex].classList.add('fire')
-      }
     }, 10)
   }
-
-  // setInterval(() => {
-  //   timesMoved++
-  //   moveIndex = moveIndex === 3 ? 0 : moveIndex + 1
-  //   moveAliens([moves[moveIndex]])
-  // }, 750)
-
-  setInterval(() => {
-    console.log('aliens moving')
-    timesMoved++
-    // move aliens down
-    if(timesMoved % 2 === 0) moveAliens(+9)
-    // move aliens right
-    else if(timesMoved % 8 === 1 || timesMoved % 8 === 5) moveAliens(+1)
-    // move aliens left
-    else if(timesMoved % 8 === 3 || timesMoved % 8 === 7) moveAliens(-1)
-  }, 750)
 
   function displayTime() {
     // set timer count to screen
     timerDisplay.innerText = timer
     // adds one to timer count
     timer ++
-    // get the current time
-    // const currentTime = new Date()
-    // currentTime.getSeconds()
-    // set the clock face innerText to be the current time
-    // timerDisplay.innerText = currentTime.toLocaleTimeString()
   }
 
   displayTime()
 
-  // EVERY SECOND (1000 ms) =========================================
-  setInterval(displayTime, 1000)
-
+  // =====  EVERY SECOND (1000 ms)  =====
+  if(gamePlay === true) {
+    setInterval(displayTime, 1000)
+  }
 
   document.addEventListener('keydown', (e) => {
     switch(e.keyCode) {
