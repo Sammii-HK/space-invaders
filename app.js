@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const gameGrid = document.querySelector('.gameGrid')
   const squares = []
 
+  const timerDisplay = document.querySelector('.time')
   // const timer = 0
   // let score = 0
 
@@ -80,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       if(fireIndex < 9 || fireIndex < 71) {
         squares[fireIndex].classList.remove('fire')
-        clearInterval(intervalId)
+        // clearInterval(intervalId)
       }
     }, 750)
   }
@@ -100,6 +101,22 @@ document.addEventListener('DOMContentLoaded', () => {
     // move aliens left
     else if(timesMoved % 8 === 3 || timesMoved % 8 === 7) moveAliens(-1)
   }, 750)
+
+  function displayTime() {
+    // timer ++
+    // timerDisplay.innerText = timer
+    // get the current time
+    const currentTime = new Date()
+    // currentTime.getSeconds()
+    // set the clock face innerText to be the current time
+    timerDisplay.innerText = currentTime.toLocaleTimeString()
+  }
+
+  displayTime()
+
+  // EVERY SECOND (1000 ms) =========================================
+  setInterval(displayTime, 1000)
+
 
   document.addEventListener('keydown', (e) => {
     switch(e.keyCode) {
@@ -127,6 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
           squares[fireIndex].classList.add('fire')
           // setInterval(moveBullet(), 750)
           moveBullet()
+          clearInterval(intervalId)
         }
         break
     }
@@ -146,6 +164,6 @@ document.addEventListener('DOMContentLoaded', () => {
 // --make gunFire() function
 // --run gunFire() function at set interval (*within a key down listener*)
 // --create keydown addEventListener for left, right and fire!
-// ability to fire multiple bullets
+// --ability to fire multiple bullets
 // if bullet hits alien, remove class from both function
 // set game conditions
