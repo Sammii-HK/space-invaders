@@ -2,27 +2,25 @@ console.log('JS loaded')
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  let timesMoved = 0
   const width = 9
   const gameGrid = document.querySelector('.gameGrid')
   const squares = []
+  const userMessage = document.querySelector('.userMessage')
 
   const timerDisplay = document.querySelector('.time')
   let timer = 0
   const scoreDisplay = document.querySelector('.score')
   let score = 0
 
-  // 8 x 3 grid, specific index values of grid
-  let aliens = [0,1,2,3,4,5,6,7,9,10,11,12,13,14,15,16,18,19,20,21,22,23,24,25]
+  let aliens = [0,1,2,3,4,5,6,7,9,10,11,12,13,14,15,16,18,19,20,21,22,23,24,25] // 8 x 3 grid, specific index values of grid
 
   // const moves = [1, 9, -1, 9]
   // let moveIndex = 0
 
+  let timesMoved = 0
   let gamePlay = true
-
   let playerIndex = 76
 
-  const userMessage = document.querySelector('.userMessage')
 
   // make grid
   for(let i = 0; i < width * width; i++) {
@@ -32,6 +30,23 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // --  Move function to event listener on reset button click when working  --
+  // !!timer function
+  function displayTime() {
+    // set timer count to screen
+    timerDisplay.innerText = timer
+    // adds one to timer count
+    timer ++
+  }
+
+  displayTime()
+
+  // =====  EVERY SECOND (1000 ms)  =====
+  const timerIntervalId = setInterval(displayTime, 1000)
+  // if(gamePlay === true) {
+  //   setInterval(displayTime, 1000)
+  // }
+
+  // --  Move function to event listener on reset button click when working  --
   // !!make aliens fill a portion of the grid
   function makeAliens() {
     // create a grid of 8 by 3
@@ -39,6 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   makeAliens()
 
+  // --  Move function to event listener on reset button click when working  --
   // !!move aliens
   function moveAliens(dir) {
     if (gamePlay === true) {
@@ -46,7 +62,6 @@ document.addEventListener('DOMContentLoaded', () => {
       aliens.forEach(alien => squares[alien].classList.remove('alien1'))
       // add 1 to each index
       aliens = aliens.map(alien => alien + dir)
-
       makeAliens()
     }
 
@@ -54,7 +69,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const lastAlien = aliens[aliens.length-1]
     if(lastAlien > 63) {
       clearInterval(alienIntervalId)
-
       gamePlay = false
     }
   }
@@ -65,6 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
   //   moveAliens([moves[moveIndex]])
   // }, 750)
 
+  // --  Move function to event listener on reset button click when working  --
   // !!alien move interval
   const alienIntervalId = setInterval(() => {
     console.log('aliens moving')
@@ -77,11 +92,14 @@ document.addEventListener('DOMContentLoaded', () => {
     else if(timesMoved % 8 === 3 || timesMoved % 8 === 7) moveAliens(-1)
 
     if (aliens[aliens.length-1] > 63) {
-      // game over
+      // !!game over condition
       userMessage.innerText = 'GAME OVER'
+      gamePlay = false
+      clearInterval(timerIntervalId)
     }
   }, 750)
 
+  // --  Move function to event listener on reset button click when working  --
   // !!set player on grid
   squares[playerIndex].classList.add('player')
   // !!move player function
@@ -95,6 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
     squares[playerIndex].classList.add('player')
   }
 
+  // --  Move function to event listener on reset button click when working  --
   // !!move bullet function
   function moveBullet(fireIndex) {
     // let fireIndex = playerIndex - width
@@ -130,28 +149,15 @@ document.addEventListener('DOMContentLoaded', () => {
         score += 10
         scoreDisplay.innerText = score
         console.log('score2', score)
+
         // !!game win condition
         if (aliens.length === 0) {
           gamePlay = false
           userMessage.innerText = 'You won!'
+          clearInterval(timerIntervalId)
         }
       }
-
     }, 10)
-  }
-  // !!timer function
-  function displayTime() {
-    // set timer count to screen
-    timerDisplay.innerText = timer
-    // adds one to timer count
-    timer ++
-  }
-
-  displayTime()
-
-  // =====  EVERY SECOND (1000 ms)  =====
-  if(gamePlay === true) {
-    setInterval(displayTime, 1000)
   }
 
   // !!keydown event listeners
@@ -182,7 +188,7 @@ document.addEventListener('DOMContentLoaded', () => {
           moveBullet(fireIndex)
         }
         break
-        
+
       case 32:
       // up
         if(gamePlay === true) {
@@ -193,22 +199,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         break
     }
-
   })
 
 
-
 })
-
-
-// ==  MVP  ==
-// --make grid
-// --make aiens move() function
-// --run aliens move() at set interval
-// --make turretMove() function
-// --make gunFire() function
-// --run gunFire() function at set interval (*within a key down listener*)
-// --create keydown addEventListener for left, right and fire!
-// --ability to fire multiple bullets
-// if bullet hits alien, remove class from both function
-// set game conditions
