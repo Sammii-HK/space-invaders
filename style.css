@@ -50,6 +50,20 @@ h1 {
   background-position-y: -50px;
 }
 
+.alien2 {
+  background-image: url('images/sprite-sheet.png');
+  background-size: 835px;
+  background-position-x: -105px;
+  background-position-y: -50px;
+}
+
+.alien3 {
+  background-image: url('images/sprite-sheet.png');
+  background-size: 835px;
+  background-position-x: 3px;
+  background-position-y: -50px;
+}
+
 .player {
   background-image: url('images/sprite-sheet.png');
   background-size: 835px;
@@ -64,7 +78,17 @@ h1 {
   background-position-y: -126px;
 }
 
-.userMessage {
-  margin-top: 250px;
+.userMessage, .start {
+  margin-top: 125px;
   font-size: 20px;
+}
+
+.start {
+  padding: 10px;
+  color: #54ff00;
+  /* background-color: #54ff00; */
+  font-weight: 800;
+  border: 3px solid #54ff00;
+  border-radius: 5px;
+  cursor: pointer;
 }
