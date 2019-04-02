@@ -7,22 +7,18 @@ document.addEventListener('DOMContentLoaded', () => {
   const squares = []
   const userMessage = document.querySelector('.userMessage')
   const startButton = document.querySelector('.start')
-
   const timerDisplay = document.querySelector('.time')
-  let timer = 0
   const scoreDisplay = document.querySelector('.score')
+  let timer = 0
   let score = 0
-
-  // let aliens = [0,1,2,3,4,5,6,7,9,10,11,12,13,14,15,16,18,19,20,21,22,23,24,25] // 8 x 3 grid, specific index values of grid
-
-  // const moves = [1, 9, -1, 9]
-  // let moveIndex = 0
-
   let timesMoved = 0
   let gamePlay = null
   let playerIndex = 76
   let currentStep = 0
 
+  // let aliens = [0,1,2,3,4,5,6,7,9,10,11,12,13,14,15,16,18,19,20,21,22,23,24,25] // 8 x 3 grid, specific index values of grid
+  // const moves = [1, 9, -1, 9]
+  // let moveIndex = 0
 
   // make grid
   for(let i = 0; i < width * width; i++) {
@@ -31,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
     gameGrid.appendChild(square)
   }
 
-  // --  Move function to event listener on reset button click when working  --
+  // --  ?Move function to event listener on reset button click when working  --
   // !!timer function
   function displayTime() {
     // set timer count to screen
@@ -39,18 +35,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // adds one to timer count
     timer ++
   }
-  // if(gamePlay === true) {
-  //   setInterval(displayTime, 1000)
-  // }
 
-// setInterval(() => {
+  // setInterval(() => {
   //   timesMoved++
   //   moveIndex = moveIndex === 3 ? 0 : moveIndex + 1
   //   moveAliens([moves[moveIndex]])
   // }, 750)
 
   // --  Move function to event listener on reset button click when working  --
-
   // !!set player on grid
   squares[playerIndex].classList.add('player')
   // !!move player function
@@ -59,7 +51,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const player = squares.find(square => square.classList.contains('player'))
     // remove the class of player from the square
     player.classList.remove('player')
-
     // add player class to square the player should move
     squares[playerIndex].classList.add('player')
   }
@@ -70,21 +61,18 @@ document.addEventListener('DOMContentLoaded', () => {
     score = 0
     timer = 0
     let aliens = [0,1,2,3,4,5,6,7,9,10,11,12,13,14,15,16,18,19,20,21,22,23,24,25]
+    aliens.forEach(alien => squares[alien].classList.remove('alien1'))
 
     displayTime()
-
-    // =====  EVERY SECOND (1000 ms)  =====
     const timerIntervalId = setInterval(displayTime, 1000)
 
     gamePlay = true
-
 
     // !!make aliens fill a portion of the grid
     function makeAliens() {
       // create a grid of 8 by 3
       aliens.forEach(alien => squares[alien].classList.add('alien1'))
     }
-
     makeAliens()
 
     aliens.forEach(alien => squares[alien].setAttribute('data-step', currentStep))
@@ -101,7 +89,6 @@ document.addEventListener('DOMContentLoaded', () => {
         // update current step for styling
         aliens.forEach(alien => squares[alien].setAttribute('data-step', currentStep))
       }
-
       // stop aliens from leaving the board
       const lastAlien = aliens[aliens.length-1]
       if(lastAlien > 63) {
@@ -120,9 +107,8 @@ document.addEventListener('DOMContentLoaded', () => {
       else if(timesMoved % 8 === 1 || timesMoved % 8 === 5) moveAliens(+1)
       // move aliens left
       else if(timesMoved % 8 === 3 || timesMoved % 8 === 7) moveAliens(-1)
-
+      // !!game over condition
       if (aliens[aliens.length-1] > 63) {
-        // !!game over condition
         userMessage.innerText = 'GAME OVER'
         gamePlay = false
         clearInterval(timerIntervalId)
@@ -149,7 +135,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         // if you've hit an alien...
         if(squares[fireIndex].classList.contains('alien1')) {
-          // clear the interval for the bullet
           clearInterval(bulletIntervalId)
           // splice the index from the alien array
           const alienIndex = aliens.indexOf(fireIndex)
@@ -158,6 +143,18 @@ document.addEventListener('DOMContentLoaded', () => {
           squares[fireIndex].classList.remove('fire')
           // remove alien class
           squares[fireIndex].classList.remove('alien1')
+
+          // show pop on death
+          // add explosion class
+          squares[fireIndex].classList.add('pop')
+          // const pop =
+          setInterval(() => {
+            // remove explosion class
+            squares[fireIndex].classList.remove('pop')
+            // squares.forEach(i => squares[i].classList.remove('pop'))
+          }, 100)
+          // clearInterval(pop)
+
           // console.log('squares[fireIndex]', squares[fireIndex])
           fireIndex -= width
           // increment points
@@ -174,6 +171,31 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }, 10)
     }
+
+    // const randomAlien = Math.floor(Math.random() * aliens.length -1)
+    //
+    // // !!move bullet function
+    // function alienBullet(randomAlien) {
+    //   // let fireIndex = playerIndex - width
+    //   const alienBulletIntervalId = setInterval(() => {
+    //     // remove the class of fire from the square
+    //     squares[randomAlien].classList.remove('fire')
+    //     // move up one row
+    //     randomAlien += width
+    //     // add fire class to square the fire should move
+    //     if(squares[randomAlien]) {
+    //       squares[randomAlien].classList.add('fire')
+    //     }
+    //     // if fireIndex is outside of sqaures array
+    //     if(!squares[randomAlien]) {
+    //       clearInterval(alienBulletIntervalId)
+    //       return false
+    //     }
+    //   }, 10)
+    // }
+    // alienBullet()
+    //
+    // setInterval(alienBullet, 100)
 
     // !!keydown event listeners
     document.addEventListener('keydown', (e) => {
