@@ -35,7 +35,7 @@ h1 {
 }
 
 .gameGrid div {
-  /* border: 1px solid grey; */
+  border: 1px solid grey;
   width: calc(100% / 9);
   height: calc(100% / 9);
 }
@@ -58,7 +58,14 @@ h1 {
   background-position-y: -126px;
 }
 
-.alien1 {
+.alien1[data-step="0"] {
+  background-image: url('images/sprite-sheet.png');
+  background-size: 835px;
+  background-position-x: -270px;
+  background-position-y: -50px;
+}
+
+.alien1[data-step="1"] {
   background-image: url('images/sprite-sheet.png');
   background-size: 835px;
   background-position-x: -220px;
@@ -87,7 +94,7 @@ h1 {
 }
 
 .userMessage, .start {
-  margin-top: 125px;
+  margin-top: 75px;
   font-size: 20px;
 }
 
