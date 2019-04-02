@@ -147,6 +147,14 @@ document.addEventListener('DOMContentLoaded', () => {
           }, 300)
           clearInterval(alienFireIntervalId)
         }
+        // ===========
+        if (lives < 1) {
+          const player = squares.find(square => square.classList.contains('player'))
+          player.classList.remove('player')
+          squares[playerIndex].classList.add('pop')
+        }
+        // ==========
+
         // =======
       }, 100) //was 100
     }
@@ -203,7 +211,6 @@ document.addEventListener('DOMContentLoaded', () => {
           // increment points
           fireIndex -= width
           score += 10
-          scoreDisplay.innerText = score
 
           // ===================
           // show pop on death
@@ -214,6 +221,7 @@ document.addEventListener('DOMContentLoaded', () => {
           }, 300)
           // ===================
 
+          scoreDisplay.innerText = score
           // !!game win condition
           if (aliens.length === 0) {
             gamePlay = false
