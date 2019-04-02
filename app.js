@@ -9,12 +9,15 @@ document.addEventListener('DOMContentLoaded', () => {
   const startButton = document.querySelector('.start')
   const timerDisplay = document.querySelector('.time')
   const scoreDisplay = document.querySelector('.score')
+  const livesDisplay = document.querySelector('.lives')
   let timer = 0
   let score = 0
   let timesMoved = 0
   let gamePlay = null
   let playerIndex = 76
   let currentStep = 0
+  let lives = 3
+  livesDisplay.innerText = lives
 
   // const moves = [1, 9, -1, 9]
   // let moveIndex = 0
@@ -55,7 +58,11 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // !! play button keydown event listener
-  startButton.addEventListener('click', () => {
+  startButton.addEventListener('click', start)
+  function start() {
+    if(gamePlay) {
+      startButton.preventDefault()
+    }
 
     score = 0
     timer = 0
@@ -121,6 +128,10 @@ document.addEventListener('DOMContentLoaded', () => {
           clearInterval(alienFireIntervalId)
           return false
         }
+        if(squares[randomAlien].classList.contains('.player')) {
+          lives -= 1
+          // livesDisplay.innerText = lives
+        }
       }, 100)
     }
     alienBullet()
@@ -138,7 +149,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // move aliens left
       else if(timesMoved % 8 === 3 || timesMoved % 8 === 7) moveAliens(-1)
       // !!game over condition
-      if (aliens[aliens.length-1] > 63) {
+      if (aliens[aliens.length-1] > 63 || lives === 0) {
         userMessage.innerText = 'GAME OVER'
         gamePlay = false
         clearInterval(timerIntervalId)
@@ -147,7 +158,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }, 750)
 
-    // !!move bullet function
+    // !!move player bullet function
     function moveBullet(fireIndex) {
       const bulletIntervalId = setInterval(() => {
         // remove the class of fire from the square
@@ -239,8 +250,7 @@ document.addEventListener('DOMContentLoaded', () => {
           break
       }
     })
-  })
-
+  }
   // startButton.addEventListener('onmouseleave', () => {
   //   startButton.style.display = 'none'
   // })
