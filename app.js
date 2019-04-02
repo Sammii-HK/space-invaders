@@ -65,6 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
     score = 0
     timer = 0
     let aliens = [0,1,2,3,4,5,6,7,9,10,11,12,13,14,15,16,18,19,20,21,22,23,24,25]
+
     aliens.forEach(alien => squares[alien].classList.remove('alien1'))
 
     displayTime()
@@ -129,23 +130,28 @@ document.addEventListener('DOMContentLoaded', () => {
           clearInterval(alienFireIntervalId)
           return false
         }
-      }, 1000) //was 100
-      // =======
-      if(squares[randomAlien].classList.contains('player')) {
-        console.log(lives)
-        lives --
-        console.log(lives)
-        // livesDisplay.innerText = lives
-        squares[randomAlien].classList.add('pop')
-        setInterval(() => {
-          // remove explosion class
-          squares[randomAlien].classList.remove('pop')
-        }, 300)
-      }
-      // =======
+        // =======
+        if(squares[randomAlien].classList.contains('player')) {
+          lives --
+          console.log('lives', lives)
+          livesDisplay.innerText = lives
+
+          squares[randomAlien].classList.remove('fire')
+          squares[playerIndex].classList.remove('player')
+
+          squares[randomAlien].classList.add('pop')
+          setInterval(() => {
+            // remove explosion class
+            squares[randomAlien].classList.remove('pop')
+            squares[playerIndex].classList.add('player')
+          }, 300)
+          clearInterval(alienFireIntervalId)
+        }
+        // =======
+      }, 100) //was 100
     }
     alienBullet()
-    const alienBulletIntervalId = setInterval(alienBullet, 1000) //was 500
+    const alienBulletIntervalId = setInterval(alienBullet, 500) //was 500
     // ===================
 
     // !!alien move interval
@@ -166,7 +172,7 @@ document.addEventListener('DOMContentLoaded', () => {
         clearInterval(alienIntervalId) // might not need
         clearInterval(alienBulletIntervalId)
       }
-    }, 1750) //was 750
+    }, 750) //was 750
 
     // !!move player bullet function
     function moveBullet(fireIndex) {
@@ -218,7 +224,7 @@ document.addEventListener('DOMContentLoaded', () => {
             clearInterval(alienBulletIntervalId)
           }
         }
-      }, 100) //was 10
+      }, 10) //was 10
     }
 
     // !!keydown event listeners

@@ -35,7 +35,7 @@ h1 {
 }
 
 .gameGrid div {
-  border: 1px solid grey;
+  /* border: 1px solid grey; */
   width: calc(100% / 9);
   height: calc(100% / 9);
 }
@@ -72,14 +72,14 @@ h1 {
   background-position-y: -50px;
 }
 
-.alien2 {
+.alien2[data-step="0"] {
   background-image: url('images/sprite-sheet.png');
   background-size: 835px;
   background-position-x: -105px;
   background-position-y: -50px;
 }
 
-.alien3 {
+.alien3[data-step="0"] {
   background-image: url('images/sprite-sheet.png');
   background-size: 835px;
   background-position-x: 3px;
