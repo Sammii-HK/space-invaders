@@ -107,7 +107,7 @@ function alienMoveInterval() {
     else if(timesMoved % 8 === 1 || timesMoved % 8 === 5) moveAliens(+1)
     else if(timesMoved % 8 === 3 || timesMoved % 8 === 7) moveAliens(-1)
     if (aliens[aliens.length-1] > 63 || lives === 0) {
-      userMessage.innerText = 'GAME OVER'
+      userMessage.innerText = 'GAME OVER. YOU LOSE'
       gamePlay = false
       clearInterval(timerIntervalId)
       clearInterval(alienIntervalId) // might not need
@@ -165,7 +165,7 @@ function moveBullet(fireIndex) {
       if (aliens.length === 0) {
         gamePlay = false
         console.log(gamePlay)
-        userMessage.innerText = 'You won!'
+        userMessage.innerText = 'GAME OVER. YOU WIN!'
         clearInterval(timerIntervalId)
         clearInterval(alienIntervalId)
         clearInterval(alienBulletIntervalId)
@@ -204,6 +204,8 @@ function startGame() {
   lives = 6
   livesDisplay.innerText = lives
   timesMoved = 0
+
+  userMessage.innerText = ''
 }
 
 // const moves = [1, 9, -1, 9]
