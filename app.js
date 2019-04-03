@@ -17,13 +17,13 @@ document.addEventListener('DOMContentLoaded', () => {
   let playerIndex = 76
   let currentStep = 0
 
-  // ***** make grid
+  // ***** make grid *****
   for(let i = 0; i < width * width; i++) {
     const square = document.createElement('div')
     squares.push(square)
     gameGrid.appendChild(square)
   }
-  // ***** timer function
+  // ***** timer function *****
   function displayTime() {
     timerDisplay.innerText = timer
     timer ++
@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
   //   moveAliens([moves[moveIndex]])
   // }, 750)
 
-  // ***** set player on grid
+  // ***** set player on grid *****
   squares[playerIndex].classList.add('player')
   function movePlayer() {
     const player = squares.find(square => square.classList.contains('player'))
@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
     squares[playerIndex].classList.add('player')
   }
 
-  // ***** play button keydown event listener
+  // ***** play button keydown event listener *****
   startButton.addEventListener('click', start)
 
   function start() {
@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     gamePlay = true
 
-    // ***** make aliens fill a portion of the grid
+    // ***** make aliens fill a portion of the grid *****
     function makeAliens() {
       // create a grid of 8 by 3
       aliens.forEach(alien => squares[alien].classList.add('alien1'))
@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // const moves = [1, 9, -1, 9]
     // let moveIndex = 0
 
-    // ***** move aliens
+    // ***** move aliens *****
     function moveAliens(dir) {
       currentStep = currentStep === 1 ? 0 : currentStep + 1
       if (gamePlay) {
@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ===================
-    // ***** move alien bullet function
+    // ***** move alien bullet function *****
     function alienBullet() {
       let randomAlien = aliens[Math.floor(Math.random() * aliens.length)]
       console.log('randomAlien', randomAlien)
@@ -137,7 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const alienBulletIntervalId = setInterval(alienBullet, 500) //was 500
     // ===================
 
-    // ***** alien move interval
+    // ***** alien move interval *****
     const alienIntervalId = setInterval(() => {
       console.log('alienBulletIntervalId')
       timesMoved++
@@ -153,7 +153,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }, 750)
 
-    // ***** move player bullet function
+    // ***** move player bullet function *****
     function moveBullet(fireIndex) {
       const bulletIntervalId = setInterval(() => {
         console.log('bulletIntervalId')
@@ -196,7 +196,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }, 10)
     }
 
-    // ***** keydown event listeners
+    // ***** keydown event listeners *****
     document.addEventListener('keydown', (e) => {
       switch(e.keyCode) {
         // left
