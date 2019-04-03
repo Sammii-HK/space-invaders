@@ -34,6 +34,13 @@ function movePlayer(dir) {
   squares[playerIndex].classList.remove('player')
   playerIndex += dir
   squares[playerIndex].classList.add('player')
+  // ===========
+  if (lives === 0) {
+    // const player = squares.find(square => square.classList.contains('player'))
+    squares[playerIndex].classList.remove('player')
+    squares[playerIndex].classList.add('pop')
+  }
+  // ==========
 }
 // ***** timer function *****
 function displayTime() {
@@ -83,25 +90,25 @@ function alienBullet() {
       squares[randomAlien].classList.add('fire')
     }
     // =======
-    if(squares[randomAlien].classList.contains('player')) {
-      livesDisplay.innerText = lives
+    if(squares[randomAlien].classList.contains('player') && lives > 0) {
       lives --
+      livesDisplay.innerText = lives
       squares[randomAlien].classList.remove('fire')
       squares[playerIndex].classList.remove('player')
       squares[randomAlien].classList.add('pop')
       setInterval(() => {
         squares[randomAlien].classList.remove('pop')
         squares[playerIndex].classList.add('player')
-      }, 300)
+      }, 500)
       clearInterval(alienFireIntervalId)
     }
-    // ===========
-    if (lives < 1) {
-      // const player = squares.find(square => square.classList.contains('player'))
-      squares[playerIndex].classList.remove('player')
-      squares[playerIndex].classList.add('pop')
-    }
-    // ==========
+    // // ===========
+    // if (lives === 0) {
+    //   // const player = squares.find(square => square.classList.contains('player'))
+    //   squares[playerIndex].classList.remove('player')
+    //   squares[playerIndex].classList.add('pop')
+    // }
+    // // ==========
   }, 100)
 }
 const alienBulletIntervalId = setInterval(alienBullet, 500)
@@ -123,7 +130,7 @@ function alienMoveInterval() {
 
       // clearInterval(alienFireIntervalId) //!!!!!!!!!!
     }
-  }, 750)
+  }, 750) 
 }
 // ***** move player bullet function *****
 function moveBullet(fireIndex) {
@@ -153,7 +160,6 @@ function moveBullet(fireIndex) {
       // ===================
       fireIndex -= width
       score += 10
-
 
       scoreDisplay.innerText = score
       if (aliens.length === 0) {
@@ -188,6 +194,10 @@ function startGame() {
   moveBullet()
   timerIntervalId = setInterval(displayTime, 1000)
 
+  score = 0
+  timer = 0
+  lives = 3
+  livesDisplay.innerText = lives
 }
 
 // const moves = [1, 9, -1, 9]
@@ -207,9 +217,6 @@ document.addEventListener('DOMContentLoaded', () => {
   livesDisplay = document.querySelector('.lives')
 
   gamePlay = true
-  score = 0
-  timer = 0
-  lives = 3
   aliens = [0,1,2,3,4,5,6,7,9,10,11,12,13,14,15,16,18,19,20,21,22,23,24,25]
 
   makeGrid()
