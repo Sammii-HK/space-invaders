@@ -170,6 +170,10 @@ function moveBullet(fireIndex) {
         clearInterval(alienIntervalId)
         clearInterval(alienBulletIntervalId)
 
+        squares[playerIndex].classList.remove('player')
+        const playerDead = squares[playerIndex].classList.add('pop')
+        setTimeout(playerDead, 500)
+
         // clearInterval(alienFireIntervalId) //!!!!!!!!!
       }
     }
@@ -201,7 +205,7 @@ function startGame() {
 
   score = 0
   timer = 0
-  lives = 6
+  lives = 3
   livesDisplay.innerText = lives
   timesMoved = 0
 
