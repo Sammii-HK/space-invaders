@@ -18,7 +18,7 @@ let currentStep = 0
 let aliens = [0,1,2,3,4,5,6,7,9,10,11,12,13,14,15,16,18,19,20,21,22,23,24,25]
 let timerIntervalId
 let alienIntervalId
-let alienFireIntervalId
+// let alienFireIntervalId
 let alienBulletIntervalId
 let player
 
@@ -36,11 +36,11 @@ function movePlayer(dir) {
   playerIndex += dir
   squares[playerIndex].classList.add('player')
   // ===========
-  if (lives === 0) {
-    // const player = squares.find(square => square.classList.contains('player'))
-    squares[playerIndex].classList.remove('player')
-    squares[playerIndex].classList.add('pop')
-  }
+  // if (lives === 0) {
+  //   // const player = squares.find(square => square.classList.contains('player'))
+  //   squares[playerIndex].classList.remove('player')
+  //   squares[playerIndex].classList.add('pop')
+  // }
   // ==========
 }
 // ***** timer function *****
@@ -56,21 +56,6 @@ function clearGrid() {
 function makeAliens() {
   // create a grid of 8 by 3
   aliens.forEach(alien => squares[alien].classList.add('alien1'))
-}
-// ***** move aliens *****
-function moveAliens(dir) {
-  currentStep = currentStep === 1 ? 0 : currentStep + 1
-  if (gamePlay) {
-    aliens.forEach(alien => squares[alien].classList.remove('alien1'))
-    aliens = aliens.map(alien => alien + dir)
-    makeAliens()
-    aliens.forEach(alien => squares[alien].setAttribute('data-step', currentStep))
-  }
-  const lastAlien = aliens[aliens.length-1]
-  if(lastAlien > 63) {
-    clearInterval(alienIntervalId)
-    gamePlay = false
-  }
 }
 // ===================
 // ***** move alien bullet function *****
@@ -116,7 +101,7 @@ function alienBullet() {
 // ***** alien move interval *****
 function alienMoveInterval() {
   const alienIntervalId = setInterval(() => {
-    console.log('alienBulletIntervalId')
+    console.log('alienIntervalId')
     timesMoved++
     if(timesMoved % 2 === 0) moveAliens(+9)
     else if(timesMoved % 8 === 1 || timesMoved % 8 === 5) moveAliens(+1)
@@ -131,6 +116,21 @@ function alienMoveInterval() {
       // clearInterval(alienFireIntervalId) //!!!!!!!!!!
     }
   }, 750)
+}
+// ***** move aliens *****
+function moveAliens(dir) {
+  currentStep = currentStep === 1 ? 0 : currentStep + 1
+  if (gamePlay) {
+    aliens.forEach(alien => squares[alien].classList.remove('alien1'))
+    aliens = aliens.map(alien => alien + dir)
+    makeAliens()
+    aliens.forEach(alien => squares[alien].setAttribute('data-step', currentStep))
+  }
+  const lastAlien = aliens[aliens.length-1]
+  if(lastAlien > 63) {
+    clearInterval(alienIntervalId)
+    gamePlay = false
+  }
 }
 // ***** move player bullet function *****
 function moveBullet(fireIndex) {
@@ -179,6 +179,9 @@ function moveBullet(fireIndex) {
 function startGame() {
   clearGrid()
 
+  gamePlay = true
+  aliens = [0,1,2,3,4,5,6,7,9,10,11,12,13,14,15,16,18,19,20,21,22,23,24,25]
+
   if(!gamePlay) {
     clearInterval(timerIntervalId)
     clearInterval(alienIntervalId)
@@ -198,8 +201,9 @@ function startGame() {
 
   score = 0
   timer = 0
-  lives = 3
+  lives = 6
   livesDisplay.innerText = lives
+  timesMoved = 0
 }
 
 // const moves = [1, 9, -1, 9]
@@ -222,7 +226,7 @@ document.addEventListener('DOMContentLoaded', () => {
   startButton.addEventListener('click', startGame)
 
   gamePlay = true
-  aliens = [0,1,2,3,4,5,6,7,9,10,11,12,13,14,15,16,18,19,20,21,22,23,24,25]
+  // aliens = [0,1,2,3,4,5,6,7,9,10,11,12,13,14,15,16,18,19,20,21,22,23,24,25]
 
   makeGrid()
 
