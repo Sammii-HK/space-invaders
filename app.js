@@ -16,8 +16,6 @@ document.addEventListener('DOMContentLoaded', () => {
   let gamePlay = null
   let playerIndex = 76
   let currentStep = 0
-  let lives = 3
-  livesDisplay.innerText = lives
 
   // make grid
   for(let i = 0; i < width * width; i++) {
@@ -58,12 +56,14 @@ document.addEventListener('DOMContentLoaded', () => {
   startButton.addEventListener('click', start)
 
   function start() {
+
     if(gamePlay) {
       startButton.preventDefault()
     }
 
     score = 0
     timer = 0
+    let lives = 3
     let aliens = [0,1,2,3,4,5,6,7,9,10,11,12,13,14,15,16,18,19,20,21,22,23,24,25]
 
     aliens.forEach(alien => squares[alien].classList.remove('alien1'))
@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // !!move aliens
     function moveAliens(dir) {
       currentStep = currentStep === 1 ? 0 : currentStep + 1
-      if (gamePlay === true) {
+      if (gamePlay) {
         // remove the classes from the aliens
         aliens.forEach(alien => squares[alien].classList.remove('alien1'))
         // add 1 to each index
@@ -111,12 +111,12 @@ document.addEventListener('DOMContentLoaded', () => {
       // pick random alien from array
       let randomAlien = aliens[Math.floor(Math.random() * aliens.length)]
       console.log('randomAlien', randomAlien)
-      console.log('alienfire1')
       // add fire class to square the fire should move
       if(squares[randomAlien]) {
         squares[randomAlien].classList.add('fire')
       }
       const alienFireIntervalId = setInterval(() => {
+        console.log('alienfire')
         // remove the class of fire from the square
         squares[randomAlien].classList.remove('fire')
         // move up one row
@@ -132,9 +132,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         // =======
         if(squares[randomAlien].classList.contains('player')) {
+          livesDisplay.innerText = lives
           lives --
           console.log('lives', lives)
-          livesDisplay.innerText = lives
 
           squares[randomAlien].classList.remove('fire')
           squares[playerIndex].classList.remove('player')
@@ -149,8 +149,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         // ===========
         if (lives < 1) {
-          const player = squares.find(square => square.classList.contains('player'))
-          player.classList.remove('player')
+          // const player = squares.find(square => square.classList.contains('player'))
+          squares[playerIndex].classList.remove('player')
           squares[playerIndex].classList.add('pop')
         }
         // ==========
@@ -164,7 +164,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // !!alien move interval
     const alienIntervalId = setInterval(() => {
-      // !?! dont need? console.log('aliens moving')
+      console.log('alienBulletIntervalId')
       timesMoved++
       // move aliens down
       if(timesMoved % 2 === 0) moveAliens(+9)
@@ -185,6 +185,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // !!move player bullet function
     function moveBullet(fireIndex) {
       const bulletIntervalId = setInterval(() => {
+        console.log('bulletIntervalId')
         // remove the class of fire from the square
         squares[fireIndex].classList.remove('fire')
         // move up one row
