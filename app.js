@@ -17,7 +17,7 @@ let playerIndex = 76
 let currentStep = 0
 let aliens = [0,1,2,3,4,5,6,7,9,10,11,12,13,14,15,16,18,19,20,21,22,23,24,25]
 let timerIntervalId
-// let alienIntervalId
+let alienIntervalId
 // let alienFireIntervalId
 let alienBulletIntervalId
 // let player
@@ -100,7 +100,7 @@ function alienBullet() {
 // ===================
 // ***** alien move interval *****
 function alienMoveInterval() {
-  const alienIntervalId = setInterval(() => {  // called function in the set interval on game start function and now the start button isnt working.....
+  const alienIntervalId = setInterval(() => {
     console.log('alienIntervalId')
     timesMoved++
     if(timesMoved % 2 === 0) moveAliens(+9)
@@ -196,9 +196,8 @@ function startGame() {
   alienMoveInterval()
   moveBullet()
   timerIntervalId = setInterval(displayTime, 1000)
-  alienBulletIntervalId = setInterval(alienBullet, 500) //**!*@*@*
 
-  // alienIntervalId = setInterval(alienMoveInterval, 750) // this fixes the clear interval, but prevents the game being set up again?! It also affects the times moved of the aliens which affects the index they start on so they start appearing off the left side of the grid and onto the right side
+  alienBulletIntervalId = setInterval(alienBullet, 500) //**!*@*@*
 
   score = 0
   timer = 0
@@ -223,13 +222,11 @@ document.addEventListener('DOMContentLoaded', () => {
   scoreDisplay = document.querySelector('.score')
   livesDisplay = document.querySelector('.lives')
 
-  // =========
   // startGame()
   startButton.addEventListener('click', startGame)
   if (gamePlay === true) {
     startButton.addEventListener('click', startGame)
   }
-  // =========
 
   gamePlay = true
   // aliens = [0,1,2,3,4,5,6,7,9,10,11,12,13,14,15,16,18,19,20,21,22,23,24,25]
