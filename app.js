@@ -19,6 +19,7 @@ let aliens = [0,1,2,3,4,5,6,7,9,10,11,12,13,14,15,16,18,19,20,21,22,23,24,25]
 let timerIntervalId
 let alienIntervalId
 let alienFireIntervalId
+let alienBulletIntervalId
 let player
 
 // ***** make grid *****
@@ -96,7 +97,7 @@ function alienBullet() {
       squares[randomAlien].classList.remove('fire')
       squares[playerIndex].classList.remove('player')
       squares[randomAlien].classList.add('pop')
-      setInterval(() => {
+      setTimeout(() => {
         squares[randomAlien].classList.remove('pop')
         squares[playerIndex].classList.add('player')
       }, 500)
@@ -111,7 +112,6 @@ function alienBullet() {
     // // ==========
   }, 100)
 }
-const alienBulletIntervalId = setInterval(alienBullet, 500)
 // ===================
 // ***** alien move interval *****
 function alienMoveInterval() {
@@ -130,7 +130,7 @@ function alienMoveInterval() {
 
       // clearInterval(alienFireIntervalId) //!!!!!!!!!!
     }
-  }, 750) 
+  }, 750)
 }
 // ***** move player bullet function *****
 function moveBullet(fireIndex) {
@@ -194,6 +194,8 @@ function startGame() {
   moveBullet()
   timerIntervalId = setInterval(displayTime, 1000)
 
+  alienBulletIntervalId = setInterval(alienBullet, 500) //**!*@*@*
+
   score = 0
   timer = 0
   lives = 3
@@ -216,11 +218,13 @@ document.addEventListener('DOMContentLoaded', () => {
   scoreDisplay = document.querySelector('.score')
   livesDisplay = document.querySelector('.lives')
 
+  // startGame()
+  startButton.addEventListener('click', startGame)
+
   gamePlay = true
   aliens = [0,1,2,3,4,5,6,7,9,10,11,12,13,14,15,16,18,19,20,21,22,23,24,25]
 
   makeGrid()
-  startGame()
 
   document.addEventListener('keydown', (e) => {
     switch(e.keyCode) {
