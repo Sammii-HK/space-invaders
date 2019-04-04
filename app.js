@@ -3,6 +3,14 @@ console.log('JS loaded')
 const width = 15
 const lastRow = width * width - width
 const squares = []
+const explosion = new Audio('sounds/explosion.wav')
+const invaderkilled = new Audio('sounds/invaderkilled.wav')
+const invader1 = new Audio('sounds/fastinvader1.wav')
+const invader2 = new Audio('sounds/fastinvader2.wav')
+const invader3 = new Audio('sounds/fastinvader3.wav')
+const invader4 = new Audio('sounds/fastinvader4.wav')
+const gameOver = new Audio('sounds/gameover.wav')
+const gameWin = new Audio('sounds/gamewin.wav')
 let gameGrid
 let startMessages
 let userMessage
@@ -24,15 +32,8 @@ let aliens = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,15,16,17,18,19,20,21,22,23,24,25,2
 let timerIntervalId
 let alienIntervalId
 let alienBulletIntervalId
+// let gameLoad
 // let alienFireIntervalId
-const explosion = new Audio('sounds/explosion.wav')
-const invaderkilled = new Audio('sounds/invaderkilled.wav')
-const invader1 = new Audio('sounds/fastinvader1.wav')
-const invader2 = new Audio('sounds/fastinvader2.wav')
-const invader3 = new Audio('sounds/fastinvader3.wav')
-const invader4 = new Audio('sounds/fastinvader4.wav')
-const gameOver = new Audio('sounds/gameover.wav')
-const gameWin = new Audio('sounds/gamewin.wav')
 
 // ***** make grid *****
 function makeGrid() {
@@ -49,6 +50,15 @@ function movePlayer(dir) {
     playerIndex += dir
     squares[playerIndex].classList.add('player')
   }
+}
+// ***** game load animation *****
+function gameLoading() {
+  const gameLoad = setInterval(() => {
+    startMessages.classList.add('gameLoad')
+    setTimeout(() => {
+      startMessages.classList.remove('gameLoad')
+    }, 100)
+  }, 200)
 }
 // ***** timer function *****
 function displayTime() {
@@ -116,6 +126,8 @@ function alienMoveInterval() {
       startButton.addEventListener('click', startGame)
       startButton.classList.remove('hidden')
       clearGrid()
+      startButton.innerText = ''
+      startButton.innerText = 'Play Again'
       // ===========
       squares[playerIndex].classList.remove('player')
       squares[playerIndex].classList.add('lifeLost')
@@ -174,17 +186,19 @@ function moveBullet(fireIndex) {
       if (aliens.length === 0) {
         gamePlay = false
         console.log(gamePlay)
-        userMessage.innerText = 'GAME OVER. YOU WIN!'
+        userMessage.innerText = 'YOU WIN!'
         console.log(level)
         clearInterval(timerIntervalId)
         clearInterval(alienIntervalId)
         clearInterval(alienBulletIntervalId)
         gameWin.play()
-
+        startButton.innerText = ''
+        startButton.innerText = 'Next Level'
+        // ===============
         // invader1.stop()
         // invader2.stop()
         // invader3.stop()
-
+        // ===============
         startButton.addEventListener('click', startGame)
         startButton.classList.remove('hidden')
         setTimeout(() => {
@@ -197,6 +211,9 @@ function moveBullet(fireIndex) {
 }
 
 function startGame() {
+  // gameLoading()
+  setTimeout(gameLoading, 500)
+  clearInterval(gameLoad)
   clearGrid()
   gamePlay = true
   // aliens = [0,1,2,3,4,5,6,7,9,10,11,12,13,14,15,16,18,19,20,21,22,23,24,25]
@@ -222,7 +239,7 @@ function startGame() {
   level ++
   livesDisplay.innerText = lives
   levelDisplay.innerText = level
-  moves = [1, width, -1, width]
+  moves = [-1, width, 1, width]
   userMessage.innerText = ''
   if (gamePlay) {
     startButton.removeEventListener('click', startGame)
@@ -239,6 +256,7 @@ document.addEventListener('DOMContentLoaded', () => {
   levelDisplay = document.querySelector('.level')
   livesDisplay = document.querySelector('.lives')
   startMessages = document.querySelector('.startMessages')
+  gameLoad = document.querySelector('.gameLoad')
   level = 0
   if (!gamePlay) {
     startButton.addEventListener('click', startGame)

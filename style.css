@@ -39,7 +39,7 @@ h1 {
 }
 
 .gameGrid div {
-  border: 1px solid grey;
+  /* border: 1px solid grey; */
   width: calc(100% / 15);
   height: calc(100% / 15);
 }
@@ -98,7 +98,7 @@ h1 {
   align-items: center;
 }
 
-.gameOver {
+.gameLoad {
   background-color: #54ff00;
   color: #000;
 }
