@@ -1,20 +1,20 @@
 * {
   box-sizing: border-box;
+  font-family: 'Press Start 2P', cursive;
 }
 
 body {
   background-color: black;
   font-family: sans-serif;
   color: #54ff00;
+  padding-top: 10%;
 }
 
 h1 {
   text-transform: uppercase;
   text-align: center;
   letter-spacing: 0.05em;
-}
-
-.body {
+  margin-bottom: 50px;
 }
 
 .gameContainer {
@@ -42,6 +42,15 @@ h1 {
 
 .gameUIContainer {
   margin-right: 50px;
+  margin-left: -170px;
+}
+
+.gameUIContainer div {
+  margin-bottom: 50px;
+}
+
+.gameUIContainer div span {
+  font-size: 26px;
 }
 
 .pop {
@@ -51,11 +60,71 @@ h1 {
   background-position-y: -129px;
 }
 
+.lifeLost {
+  background-image: url('images/sprite-sheet.png');
+  background-size: 835px;
+  background-position-x: -568px;
+  background-position-y: -129px;
+}
+
 .fire {
   background-image: url('images/sprite-sheet.png');
   background-size: 835px;
   background-position-x: -620px;
   background-position-y: -126px;
+}
+
+.player {
+  background-image: url('images/sprite-sheet.png');
+  background-size: 835px;
+  background-position-x: -424px;
+  background-position-y: -50px;
+}
+
+.startMessages {
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  font-size: 20px;
+  top: 0;
+  left: 0;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.gameOver {
+  background-color: #54ff00;
+  color: #000;
+}
+
+.message {
+  margin-top: 25px;
+}
+
+.start {
+  padding: 20px;
+  color: #54ff00;
+  /* background-color: #54ff00; */
+  font-weight: 800;
+  border: 3px solid #54ff00;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 250px;
+  height: 65px;
+  text-align: center;
+}
+
+.start:hover {
+  color: #000;
+  background-color: #54ff00;
+}
+
+.userMessage {
+  font-size: 24px;
+  font-weight: 700;
+  text-align: center;
 }
 
 .alien1[data-step="0"] {
@@ -84,27 +153,4 @@ h1 {
   background-size: 835px;
   background-position-x: 3px;
   background-position-y: -50px;
-}
-
-.player {
-  background-image: url('images/sprite-sheet.png');
-  background-size: 835px;
-  background-position-x: -424px;
-  background-position-y: -50px;
-}
-
-.userMessage, .start {
-  margin-top: 75px;
-  font-size: 20px;
-}
-
-.start {
-  padding: 10px;
-  color: #54ff00;
-  /* background-color: #54ff00; */
-  font-weight: 800;
-  border: 3px solid #54ff00;
-  border-radius: 5px;
-  cursor: pointer;
-  width: 133px;
 }

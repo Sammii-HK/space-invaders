@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>Space Invaders</title>
+    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 
     <link rel="icon" type="image/png" sizes="32x32" href="images/favicon/favicon-32x32.png">
@@ -18,14 +19,18 @@
     <div class="gameContainer">
       <div class="gameUIContainer">
         <!--  Game UI incl score and time displays-->
-        <h2>Score</h2>
-        <div class="score">0</div>
-        <h2>Time</h2>
-        <div class="time">0</div>
-        <h2>Lives</h2>
-        <div class="lives">0</div>
-        <div class="start">Start Game</div>
-        <div class="userMessage"></div>
+        <div>
+          <h2>Score</h2>
+          <span class="score">0</span>
+        </div>
+        <div>
+          <h2>Time</h2>
+          <span class="time">0</span>
+        </div>
+        <div>
+          <h2>Lives</h2>
+          <span class="lives">0</span>
+        </div>
       </div>
 
 
@@ -33,6 +38,13 @@
         <!--  JS will make game grid-->
       </div>
 
+    </div>
+    <!--  start messages  -->
+    <div class="startMessages">
+      <div class="start">Start Game</div>
+      <div class="message">
+        <div class="userMessage"></div>
+      </div>
     </div>
   </body>
 </html>
