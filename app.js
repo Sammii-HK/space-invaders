@@ -81,9 +81,9 @@ function alienBullet() {
       livesDisplay.innerText = lives
       squares[randomAlien].classList.remove('fire')
       squares[playerIndex].classList.remove('player')
-      squares[randomAlien].classList.add('pop')
+      squares[randomAlien].classList.add('lifeLost')
       setTimeout(() => {
-        squares[randomAlien].classList.remove('pop')
+        squares[randomAlien].classList.remove('lifeLost')
         squares[playerIndex].classList.add('player')
       }, 500)
       clearInterval(alienFireIntervalId)
@@ -113,6 +113,7 @@ function alienMoveInterval() {
       clearInterval(alienIntervalId) // might not need
       clearInterval(alienBulletIntervalId)
 
+      clearGrid()
       // clearInterval(alienFireIntervalId) //!!!!!!!!!!
     }
   }, 750)
@@ -170,9 +171,13 @@ function moveBullet(fireIndex) {
         clearInterval(alienIntervalId)
         clearInterval(alienBulletIntervalId)
 
-        squares[playerIndex].classList.remove('player')
-        const playerDead = squares[playerIndex].classList.add('pop')
-        setTimeout(playerDead, 500)
+        // squares[playerIndex].classList.remove('player')
+        // const playerDead = squares[playerIndex].classList.add('pop')
+        // setTimeout(playerDead, 500)
+        setTimeout(() => {
+          squares[randomAlien].classList.remove('lifeLost')
+          // squares[playerIndex].classList.add('player')
+        }, 500)
 
         // clearInterval(alienFireIntervalId) //!!!!!!!!!
       }
@@ -205,7 +210,7 @@ function startGame() {
 
   score = 0
   timer = 0
-  lives = 3
+  lives = 6
   livesDisplay.innerText = lives
   timesMoved = 0
 
@@ -234,7 +239,7 @@ document.addEventListener('DOMContentLoaded', () => {
     startButton.addEventListener('click', startGame)
   }
 
-  gamePlay = true
+  // gamePlay = true
   // aliens = [0,1,2,3,4,5,6,7,9,10,11,12,13,14,15,16,18,19,20,21,22,23,24,25]
 
   makeGrid()
