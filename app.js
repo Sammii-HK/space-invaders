@@ -101,22 +101,7 @@ function alienBullet() {
 function alienMoveInterval() {
   const alienIntervalId = setInterval(() => {
     timesMoved = timesMoved === 3 ? 0 : timesMoved + 1
-    // timesMoved++
     moveAliens(moves[timesMoved])
-
-    // console.log('alienIntervalId')
-    // timesMoved++
-    // if(timesMoved % 2 === 0) {
-    //   moveAliens(+9)
-    //   invader1.play()
-    // } else if(timesMoved % 8 === 1 || timesMoved % 8 === 5) {
-    //   moveAliens(+1)
-    //   invader2.play()
-    // } else if(timesMoved % 8 === 3 || timesMoved % 8 === 7) {
-    //   moveAliens(-1)
-    //   invader3.play()
-    // }
-
     if (aliens[aliens.length-1] > 63 || lives === 0) {
       userMessage.innerText = 'GAME OVER. YOU LOSE'
       gamePlay = false
@@ -124,19 +109,14 @@ function alienMoveInterval() {
       clearInterval(timerIntervalId)
       clearInterval(alienIntervalId) // might not need
       clearInterval(alienBulletIntervalId)
-
       gameOver.play()
-
       startButton.addEventListener('click', startGame)
       startButton.classList.remove('hidden')
-
       clearGrid()
-
       // ===========
       squares[playerIndex].classList.remove('player')
       squares[playerIndex].classList.add('lifeLost')
       // ==========
-
       // clearInterval(alienFireIntervalId) //!!!!!!!!!!
     }
   }, 750)
@@ -195,7 +175,6 @@ function moveBullet(fireIndex) {
         clearInterval(timerIntervalId)
         clearInterval(alienIntervalId)
         clearInterval(alienBulletIntervalId)
-
         gameWin.play()
 
         // invader1.stop()
@@ -207,7 +186,6 @@ function moveBullet(fireIndex) {
         setTimeout(() => {
           squares[playerIndex].classList.remove('lifeLost')
         }, 500)
-
         // clearInterval(alienFireIntervalId) //!!!!!!!!!
       }
     }
@@ -216,16 +194,13 @@ function moveBullet(fireIndex) {
 
 function startGame() {
   clearGrid()
-
   gamePlay = true
   aliens = [0,1,2,3,4,5,6,7,9,10,11,12,13,14,15,16,18,19,20,21,22,23,24,25]
-
   if(!gamePlay) {
     clearInterval(timerIntervalId)
     clearInterval(alienIntervalId)
     clearInterval(alienBulletIntervalId)
   }
-
   displayTime()
   makeAliens()
   moveAliens(0)
@@ -234,9 +209,7 @@ function startGame() {
   alienMoveInterval()
   moveBullet()
   timerIntervalId = setInterval(displayTime, 1000)
-
   alienBulletIntervalId = setInterval(alienBullet, 500) //**!*@*@*
-
   score = 0
   timer = 0
   lives = 3
@@ -245,9 +218,7 @@ function startGame() {
   levelDisplay.innerText = level
   timesMoved = 0
   moves = [1, width, -1, width]
-
   userMessage.innerText = ''
-
   if (gamePlay) {
     startButton.removeEventListener('click', startGame)
     startButton.classList.add('hidden')
@@ -263,16 +234,12 @@ document.addEventListener('DOMContentLoaded', () => {
   levelDisplay = document.querySelector('.level')
   livesDisplay = document.querySelector('.lives')
   startMessages = document.querySelector('.startMessages')
-
   level = 0
-
   if (!gamePlay) {
     startButton.addEventListener('click', startGame)
     startButton.classList.remove('hidden')
   }
-
   makeGrid()
-
   document.addEventListener('keydown', (e) => {
     switch(e.keyCode) {
       // left
