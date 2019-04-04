@@ -21,9 +21,10 @@ let currentStep = 0
 let aliens = [0,1,2,3,4,5,6,7,9,10,11,12,13,14,15,16,18,19,20,21,22,23,24,25]
 let timerIntervalId
 let alienIntervalId
-// let alienFireIntervalId
 let alienBulletIntervalId
-// let player
+// let alienFireIntervalId
+const explosion = new Audio('sounds/explosion.wav')
+const invaderkilled = new Audio('sounds/invaderkilled.wav')
 
 // ***** make grid *****
 function makeGrid() {
@@ -35,16 +36,11 @@ function makeGrid() {
 }
 // ***** set player on grid *****
 function movePlayer(dir) {
-  squares[playerIndex].classList.remove('player')
-  playerIndex += dir
-  squares[playerIndex].classList.add('player')
-  // ===========
-  // if (lives === 0) {
-  //   // const player = squares.find(square => square.classList.contains('player'))
-  //   squares[playerIndex].classList.remove('player')
-  //   squares[playerIndex].classList.add('pop')
-  // }
-  // ==========
+  if (gamePlay) {
+    squares[playerIndex].classList.remove('player')
+    playerIndex += dir
+    squares[playerIndex].classList.add('player')
+  }
 }
 // ***** timer function *****
 function displayTime() {
@@ -54,6 +50,7 @@ function displayTime() {
 // ***** clear grid *****
 function clearGrid() {
   aliens.forEach(alien => squares[alien].classList.remove('alien1'))
+  squares[playerIndex].classList.remove('lifeLost')
 }
 // ***** make aliens fill a portion of the grid *****
 function makeAliens() {
@@ -85,6 +82,7 @@ function alienBullet() {
       squares[randomAlien].classList.remove('fire')
       squares[playerIndex].classList.remove('player')
       squares[randomAlien].classList.add('lifeLost')
+      explosion.play() // ***********
       setTimeout(() => {
         squares[randomAlien].classList.remove('lifeLost')
         squares[playerIndex].classList.add('player')
@@ -121,6 +119,13 @@ function alienMoveInterval() {
       startButton.classList.remove('hidden')
 
       clearGrid()
+
+      // ===========
+      // const player = squares.find(square => square.classList.contains('player'))
+      squares[playerIndex].classList.remove('player')
+      squares[playerIndex].classList.add('lifeLost')
+      // ==========
+
       // clearInterval(alienFireIntervalId) //!!!!!!!!!!
     }
   }, 750)
@@ -159,6 +164,7 @@ function moveBullet(fireIndex) {
       aliens.splice(alienIndex, 1)
       squares[fireIndex].classList.remove('fire')
       squares[fireIndex].classList.remove('alien1')
+      invaderkilled.play() // *****************
       // ===================
       const popIndex = fireIndex
       squares[popIndex].classList.add('pop')
@@ -221,7 +227,7 @@ function startGame() {
 
   score = 0
   timer = 0
-  lives = 6
+  lives = 3
   level ++
   livesDisplay.innerText = lives
   levelDisplay.innerText = level
