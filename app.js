@@ -3,12 +3,15 @@ console.log('JS loaded')
 const width = 9
 const squares = []
 let gameGrid
+let startMessages
 let userMessage
 let timerDisplay
 let startButton
 let scoreDisplay
 let livesDisplay
+let levelDisplay
 let lives
+let level
 let timer = 0
 let score = 0
 let timesMoved = 0
@@ -109,6 +112,7 @@ function alienMoveInterval() {
     if (aliens[aliens.length-1] > 63 || lives === 0) {
       userMessage.innerText = 'GAME OVER. YOU LOSE'
       gamePlay = false
+      level = 0
       clearInterval(timerIntervalId)
       clearInterval(alienIntervalId) // might not need
       clearInterval(alienBulletIntervalId)
@@ -167,6 +171,9 @@ function moveBullet(fireIndex) {
         gamePlay = false
         console.log(gamePlay)
         userMessage.innerText = 'GAME OVER. YOU WIN!'
+        // level ++
+        // levelDisplay.innerText = level
+        console.log(level)
         clearInterval(timerIntervalId)
         clearInterval(alienIntervalId)
         clearInterval(alienBulletIntervalId)
@@ -211,7 +218,10 @@ function startGame() {
   score = 0
   timer = 0
   lives = 6
+  // level = 1
+  level ++
   livesDisplay.innerText = lives
+  levelDisplay.innerText = level
   timesMoved = 0
 
   userMessage.innerText = ''
@@ -231,12 +241,21 @@ document.addEventListener('DOMContentLoaded', () => {
   startButton = document.querySelector('.start')
   timerDisplay = document.querySelector('.time')
   scoreDisplay = document.querySelector('.score')
+  levelDisplay = document.querySelector('.level')
   livesDisplay = document.querySelector('.lives')
+  startMessages = document.querySelector('.startMessages')
+
+  level = 0
 
   // startGame()
-  startButton.addEventListener('click', startGame)
-  if (gamePlay === true) {
+  // startButton.addEventListener('click', startGame)
+  if (!gamePlay) {
     startButton.addEventListener('click', startGame)
+    startButton.classList.remove('hidden')
+    // startButton.style.display = 'flex'
+  } else if (gamePlay) {
+    startButton.addEventListener('click', startGame)
+    startButton.classList.add('hidden')
   }
 
   // gamePlay = true
