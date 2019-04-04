@@ -53,16 +53,27 @@ function movePlayer(dir) {
   }
 }
 // ***** game load animation *****
-// function gameLoading() {
-  // const gameLoading = setInterval(() => {
-  // setInterval(() => {
-  const gameLoading = setTimeout(() => {
+
+// let time = 3
+// const test = setInterval(() => {
+//   console.log(time)
+//   time--
+// }, 1000)
+// setTimeout(() => {
+//   clearInterval(test)
+// }, 4000)
+
+function gameLoad() {
+  const gameLoading = setInterval(() => {
     startMessages.classList.add('gameLoad')
     setTimeout(() => {
       startMessages.classList.remove('gameLoad')
     }, 100)
-  }, 100)
-// }
+  }, 200)
+  setTimeout(() => {
+    clearInterval(gameLoading)
+  }, 1000)
+}
 // ***** timer function *****
 function displayTime() {
   timerDisplay.innerText = timer
@@ -129,6 +140,7 @@ function alienMoveInterval() {
       startButton.addEventListener('click', startGame)
       startButton.classList.remove('hidden')
       clearGrid()
+      gameLoad()
       startButton.innerText = ''
       startButton.innerText = 'Play Again'
       // ===========
@@ -195,6 +207,7 @@ function moveBullet(fireIndex) {
         clearInterval(alienIntervalId)
         clearInterval(alienBulletIntervalId)
         gameWin.play()
+        gameLoad()
         startButton.innerText = ''
         startButton.innerText = 'Next Level'
         // ===============
@@ -214,11 +227,6 @@ function moveBullet(fireIndex) {
 }
 
 function startGame() {
-  // gameLoading()
-  // setInterval(gameLoading, 2000)
-  setTimeout(gameLoading, 200)
-  // clearInterval(gameLoading)
-
   clearGrid()
   gamePlay = true
   // aliens = [0,1,2,3,4,5,6,7,9,10,11,12,13,14,15,16,18,19,20,21,22,23,24,25]
@@ -261,13 +269,15 @@ document.addEventListener('DOMContentLoaded', () => {
   levelDisplay = document.querySelector('.level')
   livesDisplay = document.querySelector('.lives')
   startMessages = document.querySelector('.startMessages')
-  gameLoad = document.querySelector('.gameLoad')
+  // gameLoad = document.querySelector('.gameLoad')
   level = 0
   if (!gamePlay) {
     startButton.addEventListener('click', startGame)
     startButton.classList.remove('hidden')
   }
+  // an array of objects each object is an array of name and scoreDisplay save as json in local storage, saves it as string, pull it back in json.parse and json.stringfy
   makeGrid()
+  gameLoad()
   document.addEventListener('keydown', (e) => {
     switch(e.keyCode) {
       // left
