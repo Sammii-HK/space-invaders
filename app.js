@@ -33,7 +33,8 @@ let aliens = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,15,16,17,18,19,20,21,22,23,24,25,2
 let timerIntervalId
 let alienIntervalId
 let alienBulletIntervalId
-// let gameLoad
+const highScore = localStorage.getItem('highScore')
+const highScoreDisplay = document.querySelector('highScoreDisplay')
 // let alienFireIntervalId
 
 // ***** make grid *****
@@ -53,16 +54,6 @@ function movePlayer(dir) {
   }
 }
 // ***** game load animation *****
-
-// let time = 3
-// const test = setInterval(() => {
-//   console.log(time)
-//   time--
-// }, 1000)
-// setTimeout(() => {
-//   clearInterval(test)
-// }, 4000)
-
 function gameLoad() {
   const gameLoading = setInterval(() => {
     startMessages.classList.add('gameLoad')
