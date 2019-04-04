@@ -117,6 +117,9 @@ function alienMoveInterval() {
       clearInterval(alienIntervalId) // might not need
       clearInterval(alienBulletIntervalId)
 
+      startButton.addEventListener('click', startGame)
+      startButton.classList.remove('hidden')
+
       clearGrid()
       // clearInterval(alienFireIntervalId) //!!!!!!!!!!
     }
@@ -178,6 +181,9 @@ function moveBullet(fireIndex) {
         clearInterval(alienIntervalId)
         clearInterval(alienBulletIntervalId)
 
+        startButton.addEventListener('click', startGame)
+        startButton.classList.remove('hidden')
+
         // squares[playerIndex].classList.remove('player')
         // const playerDead = squares[playerIndex].classList.add('pop')
         // setTimeout(playerDead, 500)
@@ -225,6 +231,15 @@ function startGame() {
   timesMoved = 0
 
   userMessage.innerText = ''
+
+  // if (!gamePlay) {
+  //   startButton.addEventListener('click', startGame)
+  //   startButton.classList.remove('hidden')
+  // }
+  if (gamePlay) {
+    startButton.removeEventListener('click', startGame)
+    startButton.classList.add('hidden')
+  }
 }
 
 // const moves = [1, 9, -1, 9]
@@ -249,14 +264,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // startGame()
   // startButton.addEventListener('click', startGame)
+
   if (!gamePlay) {
     startButton.addEventListener('click', startGame)
     startButton.classList.remove('hidden')
-    // startButton.style.display = 'flex'
-  } else if (gamePlay) {
-    startButton.addEventListener('click', startGame)
-    startButton.classList.add('hidden')
   }
+
+  // else if (gamePlay) {
+  //   startButton.removeEventListener('click', startGame)
+  //   startButton.classList.add('hidden')
+  // }
 
   // gamePlay = true
   // aliens = [0,1,2,3,4,5,6,7,9,10,11,12,13,14,15,16,18,19,20,21,22,23,24,25]
