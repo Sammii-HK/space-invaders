@@ -1,6 +1,7 @@
 console.log('JS loaded')
 
-const width = 9
+const width = 15
+const lastRow = width * width - width
 const squares = []
 let gameGrid
 let startMessages
@@ -17,9 +18,9 @@ let score = 0
 let moves
 let timesMoved = 0
 let gamePlay = false
-let playerIndex = 76
+let playerIndex = 218
 let currentStep = 0
-let aliens = [0,1,2,3,4,5,6,7,9,10,11,12,13,14,15,16,18,19,20,21,22,23,24,25]
+let aliens = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,15,16,17,18,19,20,21,22,23,24,25,26,27,28,30,31,32,33,34,35,36,37,38,39,40,41,42,43]
 let timerIntervalId
 let alienIntervalId
 let alienBulletIntervalId
@@ -29,7 +30,7 @@ const invaderkilled = new Audio('sounds/invaderkilled.wav')
 const invader1 = new Audio('sounds/fastinvader1.wav')
 const invader2 = new Audio('sounds/fastinvader2.wav')
 const invader3 = new Audio('sounds/fastinvader3.wav')
-// const invader4 = new Audio('sounds/fastinvader4.wav')
+const invader4 = new Audio('sounds/fastinvader4.wav')
 const gameOver = new Audio('sounds/gameover.wav')
 const gameWin = new Audio('sounds/gamewin.wav')
 
@@ -95,14 +96,16 @@ function alienBullet() {
     }
   }, 100)
 }
-
-
 // ***** alien move interval *****
 function alienMoveInterval() {
   const alienIntervalId = setInterval(() => {
     timesMoved = timesMoved === 3 ? 0 : timesMoved + 1
     moveAliens(moves[timesMoved])
-    if (aliens[aliens.length-1] > 63 || lives === 0) {
+    if (timesMoved === 0) invader1.play()
+    else if (timesMoved === 1) invader2.play()
+    else if (timesMoved === 2) invader3.play()
+    else if (timesMoved === 3) invader4.play()
+    if (aliens[aliens.length-1] > lastRow || lives === 0) {
       userMessage.innerText = 'GAME OVER. YOU LOSE'
       gamePlay = false
       level = 0
@@ -131,7 +134,8 @@ function moveAliens(dir) {
     aliens.forEach(alien => squares[alien].setAttribute('data-step', currentStep))
   }
   const lastAlien = aliens[aliens.length-1]
-  if(lastAlien > 63) {
+  // console.log(lastRow)
+  if(lastAlien > lastRow) {
     clearInterval(alienIntervalId)
     gamePlay = false
   }
@@ -195,7 +199,8 @@ function moveBullet(fireIndex) {
 function startGame() {
   clearGrid()
   gamePlay = true
-  aliens = [0,1,2,3,4,5,6,7,9,10,11,12,13,14,15,16,18,19,20,21,22,23,24,25]
+  // aliens = [0,1,2,3,4,5,6,7,9,10,11,12,13,14,15,16,18,19,20,21,22,23,24,25]
+  aliens = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,15,16,17,18,19,20,21,22,23,24,25,26,27,28,30,31,32,33,34,35,36,37,38,39,40,41,42,43]
   if(!gamePlay) {
     clearInterval(timerIntervalId)
     clearInterval(alienIntervalId)
@@ -212,11 +217,11 @@ function startGame() {
   alienBulletIntervalId = setInterval(alienBullet, 500) //**!*@*@*
   score = 0
   timer = 0
-  lives = 3
+  lives = 6
+  timesMoved = 0
   level ++
   livesDisplay.innerText = lives
   levelDisplay.innerText = level
-  timesMoved = 0
   moves = [1, width, -1, width]
   userMessage.innerText = ''
   if (gamePlay) {

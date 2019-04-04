@@ -39,9 +39,9 @@ h1 {
 }
 
 .gameGrid div {
-  /* border: 1px solid grey; */
-  width: calc(100% / 9);
-  height: calc(100% / 9);
+  border: 1px solid grey;
+  width: calc(100% / 15);
+  height: calc(100% / 15);
 }
 
 .gameUIContainer {
@@ -59,30 +59,30 @@ h1 {
 
 .pop {
   background-image: url('images/sprite-sheet.png');
-  background-size: 835px;
-  background-position-x: -673px;
-  background-position-y: -129px;
+  background-size: 600px;
+  background-position-x: -487px;
+  background-position-y: -96px;
 }
 
 .lifeLost {
   background-image: url('images/sprite-sheet.png');
-  background-size: 835px;
-  background-position-x: -568px;
-  background-position-y: -129px;
+  background-size: 600px;
+  background-position-x: -409px;
+  background-position-y: -88px;
 }
 
 .fire {
   background-image: url('images/sprite-sheet.png');
-  background-size: 835px;
-  background-position-x: -620px;
-  background-position-y: -126px;
+  background-size: 600px;
+  background-position-x: -449px;
+  background-position-y: -94px;
 }
 
 .player {
   background-image: url('images/sprite-sheet.png');
-  background-size: 835px;
-  background-position-x: -424px;
-  background-position-y: -50px;
+  background-size: 600px;
+  background-position-x: -308px;
+  background-position-y: -36px;
 }
 
 .startMessages {
@@ -133,28 +133,42 @@ h1 {
 
 .alien1[data-step="0"] {
   background-image: url('images/sprite-sheet.png');
-  background-size: 835px;
-  background-position-x: -270px;
-  background-position-y: -50px;
+  background-size: 600px;
+  background-position-x: -162px;
+  background-position-y: -40px;
 }
 
 .alien1[data-step="1"] {
   background-image: url('images/sprite-sheet.png');
-  background-size: 835px;
-  background-position-x: -220px;
-  background-position-y: -50px;
+  background-size: 600px;
+  background-position-x: -198px;
+  background-position-y: -40px;
 }
 
 .alien2[data-step="0"] {
   background-image: url('images/sprite-sheet.png');
-  background-size: 835px;
-  background-position-x: -105px;
-  background-position-y: -50px;
+  background-size: 600px;
+  background-position-x: -79px;
+  background-position-y: -39px;
+}
+
+.alien2[data-step="1"] {
+  background-image: url('images/sprite-sheet.png');
+  background-size: 600px;
+  background-position-x: -116px;
+  background-position-y: -39px;
 }
 
 .alien3[data-step="0"] {
   background-image: url('images/sprite-sheet.png');
-  background-size: 835px;
-  background-position-x: 3px;
-  background-position-y: -50px;
+  background-size: 600px;
+  background-position-x: -1px;
+  background-position-y: -39px;
+}
+
+.alien3[data-step="1"] {
+  background-image: url('images/sprite-sheet.png');
+  background-size: 600px;
+  background-position-x: -38px;
+  background-position-y: -39px;
 }
