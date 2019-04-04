@@ -28,7 +28,9 @@ const invaderkilled = new Audio('sounds/invaderkilled.wav')
 const invader1 = new Audio('sounds/fastinvader1.wav')
 const invader2 = new Audio('sounds/fastinvader2.wav')
 const invader3 = new Audio('sounds/fastinvader3.wav')
-const invader4 = new Audio('sounds/fastinvader4.wav')
+// const invader4 = new Audio('sounds/fastinvader4.wav')
+const gameOver = new Audio('sounds/gameover.wav')
+const gameWin = new Audio('sounds/gamewin.wav')
 
 // ***** make grid *****
 function makeGrid() {
@@ -58,7 +60,6 @@ function clearGrid() {
 }
 // ***** make aliens fill a portion of the grid *****
 function makeAliens() {
-  // create a grid of 8 by 3
   aliens.forEach(alien => squares[alien].classList.add('alien1'))
 }
 // ===================
@@ -79,7 +80,6 @@ function alienBullet() {
     if(squares[randomAlien]) {
       squares[randomAlien].classList.add('fire')
     }
-    // =======
     if(squares[randomAlien].classList.contains('player') && lives > 0) {
       lives --
       livesDisplay.innerText = lives
@@ -93,16 +93,8 @@ function alienBullet() {
       }, 500)
       clearInterval(alienFireIntervalId)
     }
-    // // ===========
-    // if (lives === 0) {
-    //   // const player = squares.find(square => square.classList.contains('player'))
-    //   squares[playerIndex].classList.remove('player')
-    //   squares[playerIndex].classList.add('pop')
-    // }
-    // // ==========
   }, 100)
 }
-// ===================
 // ***** alien move interval *****
 function alienMoveInterval() {
   const alienIntervalId = setInterval(() => {
@@ -125,6 +117,8 @@ function alienMoveInterval() {
       clearInterval(timerIntervalId)
       clearInterval(alienIntervalId) // might not need
       clearInterval(alienBulletIntervalId)
+
+      gameOver.play()
 
       startButton.addEventListener('click', startGame)
       startButton.classList.remove('hidden')
@@ -195,6 +189,8 @@ function moveBullet(fireIndex) {
         clearInterval(timerIntervalId)
         clearInterval(alienIntervalId)
         clearInterval(alienBulletIntervalId)
+
+        gameWin.play()
 
         startButton.addEventListener('click', startGame)
         startButton.classList.remove('hidden')
