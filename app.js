@@ -174,8 +174,6 @@ function moveBullet(fireIndex) {
         gamePlay = false
         console.log(gamePlay)
         userMessage.innerText = 'GAME OVER. YOU WIN!'
-        // level ++
-        // levelDisplay.innerText = level
         console.log(level)
         clearInterval(timerIntervalId)
         clearInterval(alienIntervalId)
@@ -224,7 +222,6 @@ function startGame() {
   score = 0
   timer = 0
   lives = 6
-  // level = 1
   level ++
   livesDisplay.innerText = lives
   levelDisplay.innerText = level
@@ -232,10 +229,6 @@ function startGame() {
 
   userMessage.innerText = ''
 
-  // if (!gamePlay) {
-  //   startButton.addEventListener('click', startGame)
-  //   startButton.classList.remove('hidden')
-  // }
   if (gamePlay) {
     startButton.removeEventListener('click', startGame)
     startButton.classList.add('hidden')
@@ -262,21 +255,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   level = 0
 
-  // startGame()
-  // startButton.addEventListener('click', startGame)
-
   if (!gamePlay) {
     startButton.addEventListener('click', startGame)
     startButton.classList.remove('hidden')
   }
-
-  // else if (gamePlay) {
-  //   startButton.removeEventListener('click', startGame)
-  //   startButton.classList.add('hidden')
-  // }
-
-  // gamePlay = true
-  // aliens = [0,1,2,3,4,5,6,7,9,10,11,12,13,14,15,16,18,19,20,21,22,23,24,25]
 
   makeGrid()
 
