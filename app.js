@@ -14,6 +14,7 @@ let lives
 let level
 let timer = 0
 let score = 0
+let moves
 let timesMoved = 0
 let gamePlay = false
 let playerIndex = 76
@@ -94,21 +95,28 @@ function alienBullet() {
     }
   }, 100)
 }
+
+
 // ***** alien move interval *****
 function alienMoveInterval() {
   const alienIntervalId = setInterval(() => {
-    console.log('alienIntervalId')
-    timesMoved++
-    if(timesMoved % 2 === 0) {
-      moveAliens(+9)
-      invader1.play()
-    } else if(timesMoved % 8 === 1 || timesMoved % 8 === 5) {
-      moveAliens(+1)
-      invader2.play()
-    } else if(timesMoved % 8 === 3 || timesMoved % 8 === 7) {
-      moveAliens(-1)
-      invader3.play()
-    }
+    timesMoved = timesMoved === 3 ? 0 : timesMoved + 1
+    // timesMoved++
+    moveAliens(moves[timesMoved])
+
+    // console.log('alienIntervalId')
+    // timesMoved++
+    // if(timesMoved % 2 === 0) {
+    //   moveAliens(+9)
+    //   invader1.play()
+    // } else if(timesMoved % 8 === 1 || timesMoved % 8 === 5) {
+    //   moveAliens(+1)
+    //   invader2.play()
+    // } else if(timesMoved % 8 === 3 || timesMoved % 8 === 7) {
+    //   moveAliens(-1)
+    //   invader3.play()
+    // }
+
     if (aliens[aliens.length-1] > 63 || lives === 0) {
       userMessage.innerText = 'GAME OVER. YOU LOSE'
       gamePlay = false
@@ -167,7 +175,7 @@ function moveBullet(fireIndex) {
       aliens.splice(alienIndex, 1)
       squares[fireIndex].classList.remove('fire')
       squares[fireIndex].classList.remove('alien1')
-      invaderkilled.play() 
+      invaderkilled.play()
       // ===================
       const popIndex = fireIndex
       squares[popIndex].classList.add('pop')
@@ -189,6 +197,10 @@ function moveBullet(fireIndex) {
         clearInterval(alienBulletIntervalId)
 
         gameWin.play()
+
+        // invader1.stop()
+        // invader2.stop()
+        // invader3.stop()
 
         startButton.addEventListener('click', startGame)
         startButton.classList.remove('hidden')
@@ -232,6 +244,7 @@ function startGame() {
   livesDisplay.innerText = lives
   levelDisplay.innerText = level
   timesMoved = 0
+  moves = [1, width, -1, width]
 
   userMessage.innerText = ''
 
@@ -240,14 +253,6 @@ function startGame() {
     startButton.classList.add('hidden')
   }
 }
-
-// const moves = [1, 9, -1, 9]
-// let moveIndex = 0
-// setInterval(() => {
-//   timesMoved++
-//   moveIndex = moveIndex === 3 ? 0 : moveIndex + 1
-//   moveAliens([moves[moveIndex]])
-// }, 750)
 
 document.addEventListener('DOMContentLoaded', () => {
   gameGrid = document.querySelector('.gameGrid')
