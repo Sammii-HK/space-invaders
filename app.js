@@ -3,6 +3,7 @@ console.log('JS loaded')
 const width = 15
 const lastRow = width * width - width
 const squares = []
+const fire = new Audio('sounds/shoot.wav')
 const explosion = new Audio('sounds/explosion.wav')
 const invaderkilled = new Audio('sounds/invaderkilled.wav')
 const invader1 = new Audio('sounds/fastinvader1.wav')
@@ -52,14 +53,16 @@ function movePlayer(dir) {
   }
 }
 // ***** game load animation *****
-function gameLoading() {
-  const gameLoad = setInterval(() => {
+// function gameLoading() {
+  // const gameLoading = setInterval(() => {
+  // setInterval(() => {
+  const gameLoading = setTimeout(() => {
     startMessages.classList.add('gameLoad')
     setTimeout(() => {
       startMessages.classList.remove('gameLoad')
     }, 100)
-  }, 200)
-}
+  }, 100)
+// }
 // ***** timer function *****
 function displayTime() {
   timerDisplay.innerText = timer
@@ -212,8 +215,10 @@ function moveBullet(fireIndex) {
 
 function startGame() {
   // gameLoading()
-  setTimeout(gameLoading, 500)
-  clearInterval(gameLoad)
+  // setInterval(gameLoading, 2000)
+  setTimeout(gameLoading, 200)
+  // clearInterval(gameLoading)
+
   clearGrid()
   gamePlay = true
   // aliens = [0,1,2,3,4,5,6,7,9,10,11,12,13,14,15,16,18,19,20,21,22,23,24,25]
@@ -284,6 +289,7 @@ document.addEventListener('DOMContentLoaded', () => {
           console.log(fireIndex, 'fire index')
           squares[fireIndex].classList.add('fire')
           moveBullet(fireIndex)
+          fire.play()
         }
         break
       // space
@@ -292,6 +298,7 @@ document.addEventListener('DOMContentLoaded', () => {
           const fireIndex = playerIndex - width
           squares[fireIndex].classList.add('fire')
           moveBullet(fireIndex)
+          fire.play()
         }
         break
     }
