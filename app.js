@@ -25,6 +25,10 @@ let alienBulletIntervalId
 // let alienFireIntervalId
 const explosion = new Audio('sounds/explosion.wav')
 const invaderkilled = new Audio('sounds/invaderkilled.wav')
+const invader1 = new Audio('sounds/fastinvader1.wav')
+const invader2 = new Audio('sounds/fastinvader2.wav')
+const invader3 = new Audio('sounds/fastinvader3.wav')
+const invader4 = new Audio('sounds/fastinvader4.wav')
 
 // ***** make grid *****
 function makeGrid() {
@@ -104,9 +108,16 @@ function alienMoveInterval() {
   const alienIntervalId = setInterval(() => {
     console.log('alienIntervalId')
     timesMoved++
-    if(timesMoved % 2 === 0) moveAliens(+9)
-    else if(timesMoved % 8 === 1 || timesMoved % 8 === 5) moveAliens(+1)
-    else if(timesMoved % 8 === 3 || timesMoved % 8 === 7) moveAliens(-1)
+    if(timesMoved % 2 === 0) {
+      moveAliens(+9)
+      invader1.play()
+    } else if(timesMoved % 8 === 1 || timesMoved % 8 === 5) {
+      moveAliens(+1)
+      invader2.play()
+    } else if(timesMoved % 8 === 3 || timesMoved % 8 === 7) {
+      moveAliens(-1)
+      invader3.play()
+    }
     if (aliens[aliens.length-1] > 63 || lives === 0) {
       userMessage.innerText = 'GAME OVER. YOU LOSE'
       gamePlay = false
