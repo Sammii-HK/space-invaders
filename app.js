@@ -33,9 +33,10 @@ let aliens = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,15,16,17,18,19,20,21,22,23,24,25,2
 let timerIntervalId
 let alienIntervalId
 let alienBulletIntervalId
-const highScore = localStorage.getItem('highScore')
-const highScoreDisplay = document.querySelector('highScoreDisplay')
+// const highScore = localStorage.getItem('highScore')
+// const highScoreDisplay = document.querySelector('highScoreDisplay')
 // let alienFireIntervalId
+// an array of objects each object is an array of name and scoreDisplay save as json in local storage, saves it as string, pull it back in json.parse and json.stringfy
 
 // ***** make grid *****
 function makeGrid() {
@@ -266,7 +267,6 @@ document.addEventListener('DOMContentLoaded', () => {
     startButton.addEventListener('click', startGame)
     startButton.classList.remove('hidden')
   }
-  // an array of objects each object is an array of name and scoreDisplay save as json in local storage, saves it as string, pull it back in json.parse and json.stringfy
   makeGrid()
   gameLoad()
   document.addEventListener('keydown', (e) => {
