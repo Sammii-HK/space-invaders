@@ -1,6 +1,6 @@
 # JavaScript Game: Space Invaders – SEI Project 1
 
-[Live Site](*https://sammii-hk.github.io/SEI-Project-1-spaceInvaders/*)
+[Live Site](https://sammii-hk.github.io/SEI-Project-1-spaceInvaders/)
 
 ### Timeframe
 7 days
@@ -28,7 +28,7 @@
 
 ![spaceInvadersGamePlay](https://user-images.githubusercontent.com/40900195/55622280-a74c8980-5797-11e9-94c4-268592fe22c6.gif)
 
-[_Link to live site_]([_Link to live site_](https://sammii-hk.github.io/SEI-Project-1-spaceInvaders/))
+[_Link to live site_](https://sammii-hk.github.io/SEI-Project-1-spaceInvaders/): https://sammii-hk.github.io/SEI-Project-1-spaceInvaders/
 
 ### Introduction
 This is a game I created, where I tried to recreate the original arcade version of Space Invaders. The aim is so survive for as long as possible, by killing all of the aliens before they invade planet earth.
