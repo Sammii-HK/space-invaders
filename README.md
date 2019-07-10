@@ -1,4 +1,6 @@
-# Project 1: JavaScript Game – Space Invaders
+# JavaScript Game: Space Invaders – SEI Project 1
+
+[Live Site](*https://sammii-hk.github.io/SEI-Project-1-spaceInvaders/*)
 
 ### Timeframe
 7 days
@@ -8,8 +10,8 @@
 * JavaScript (ES6)
 * HTML5
 * CSS
-* git
-
+* Git
+* GitHub
 * _add other technologies here... (HTML5 Audio, CSS animation, localStorage etc)_
 * _Javascript audio_
 
@@ -26,7 +28,7 @@
 
 ![spaceInvadersGamePlay](https://user-images.githubusercontent.com/40900195/55622280-a74c8980-5797-11e9-94c4-268592fe22c6.gif)
 
-[_Link to live site_](https://sammii-hk.github.io/SEI-spaceInvaders/)
+[_Link to live site_]([_Link to live site_](https://sammii-hk.github.io/SEI-Project-1-spaceInvaders/))
 
 ### Introduction
 This is a game I created, where I tried to recreate the original arcade version of Space Invaders. The aim is so survive for as long as possible, by killing all of the aliens before they invade planet earth.
@@ -64,12 +66,16 @@ This is a game I created, where I tried to recreate the original arcade version 
 1. Once a level has been won, this then displays a 'Next Level' button, which when pressed, allows the player to start the next level, and resets the score, lives and timer values.
 
 ### Challenges
-_Describe the biggest challenges. How did you overcome them? Did you decide to pivot because of time constraints? What did you learn from these problems?_
+
+As this was my first JavaScript project I encountered many difficulties:
+
+- All of the visuals were created in JavaScript so did not exist on page load
+- I chose this project so I could practice setIntervals as I needed to cement my learning, and this project contained many and it was difficult to manage so many which were running at once, but at different times
 
 ### Wins
 During this project I had multiple wins, these include:
 * I have learnt so much during this project and I am really happy with what I have managed to achieve with my new JavaScript knowledge
-*
+* I thought the extra design features, such as the flash on game load and the 'Start Game' button added to the user experience of the game
 
 ## Future features
 There are a few features I would like to add going forward:
