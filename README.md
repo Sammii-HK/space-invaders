@@ -1,6 +1,6 @@
 # JavaScript Game: Space Invaders – SEI Project 1
 
-[Live Site](https://sammii-hk.github.io/SEI-Project-1-spaceInvaders/): https://sammii-hk.github.io/SEI-Project-1-spaceInvaders/
+[Live Site](https://sammii-hk.github.io/spaceInvaders/): https://sammii-hk.github.io/spaceInvaders/
 
 ### Timeframe
 7 days
