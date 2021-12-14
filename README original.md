@@ -1,65 +1,57 @@
-# Space Invaders – SEI Project 1
+# JavaScript Game: Space Invaders – SEI Project 1
 
-A faithful recreation of the original arcade game Space Invaders, built with Javascript. The game features include, keyboard controls, numbered lives, sounds and even progressively difficult levels.
-
-## Details
+[Live Site](https://sammii-hk.github.io/spaceInvaders/): https://sammii-hk.github.io/spaceInvaders/
 
 ### Timeframe
-
 7 days
 
-### Technologies Used
+## Technologies used
 
 * JavaScript (ES6)
 * HTML5
 * CSS
 * Git
 * GitHub
-* Javascript audio
+* _add other technologies here... (HTML5 Audio, CSS animation, localStorage etc)_
+* _Javascript audio_
 
-### App Overview
-
-The app aimed to fully replicate the original arcade game and built purely with vanilla Javascript.
-
-[**Link to live site**](https://sammii-hk.github.io/space-invaders/)
-
-![image](https://user-images.githubusercontent.com/40900195/55617060-34d5ac80-578b-11e9-9278-06a6a0485bc5.png)
-
-#### Installation
+## Installation
 
 1. Clone or download the repo
 1. Open the `index.html` in your browser of choice
 
-#### Development Process
+## My Space Invaders Game
 
-How I went about it
+<img width="1680" alt="Screenshot 2019-04-05 at 10 04 55" src="https://user-images.githubusercontent.com/40900195/55617060-34d5ac80-578b-11e9-9278-06a6a0485bc5.png">
 
-#### Functionality
+### Overview
 
-AKA How it may be used.
+![spaceInvadersGamePlay](https://user-images.githubusercontent.com/40900195/55622280-a74c8980-5797-11e9-94c4-268592fe22c6.gif)
 
-##### Controls
+[_Link to live site_](https://sammii-hk.github.io/SEI-Project-1-spaceInvaders/): https://sammii-hk.github.io/SEI-Project-1-spaceInvaders/
 
+### Introduction
+This is a game I created, where I tried to recreate the original arcade version of Space Invaders. The aim is so survive for as long as possible, by killing all of the aliens before they invade planet earth.
+
+### Controls
 * Player movements: ← → keys
 * Fire control: ↑ key & space bar
 
-##### Game Instructions
-
+### Game Instructions
 1. Click on the start game button
-![start-game](https://user-images.githubusercontent.com/40900195/55618431-69973300-578e-11e9-8eae-1a74593fbb30.png)
+<img width="1677" alt="Screenshot 2019-04-05 at 10 21 44" src="https://user-images.githubusercontent.com/40900195/55618431-69973300-578e-11e9-8eae-1a74593fbb30.png">
 1. Use the left and right arrow keys to move the player. You can fire using the up arrow key and the space bar.
-![fire-action](https://user-images.githubusercontent.com/40900195/55618541-aebb6500-578e-11e9-9321-78210fc8f7c5.png)
+<img width="1676" alt="Screenshot 2019-04-05 at 10 21 51" src="https://user-images.githubusercontent.com/40900195/55618541-aebb6500-578e-11e9-9321-78210fc8f7c5.png">
 1. If you run out of lives, or the aliens invade the planet then its game over.
-![game-over](https://user-images.githubusercontent.com/40900195/55618568-c7c41600-578e-11e9-915c-2888111298b6.png)
+<img width="1675" alt="Screenshot 2019-04-05 at 10 22 42" src="https://user-images.githubusercontent.com/40900195/55618568-c7c41600-578e-11e9-915c-2888111298b6.png">
 1. If you manage to kill all of the aliens, you win that level and can progress onto the next level.
-![you-win](https://user-images.githubusercontent.com/40900195/55618605-e1655d80-578e-11e9-8c21-2cd49fd25bee.png)
+<img width="1675" alt="Screenshot 2019-04-05 at 10 29 41" src="https://user-images.githubusercontent.com/40900195/55618605-e1655d80-578e-11e9-8c21-2cd49fd25bee.png">
 1. As you progress through the levels, they get harder as the aliens move faster with each level, increasing the difficulty. Each level the lives get reset.
-![next-level](https://user-images.githubusercontent.com/40900195/55618685-08bc2a80-578f-11e9-9bb2-208cc4c79701.png)
+<img width="1680" alt="Screenshot 2019-04-05 at 10 29 50" src="https://user-images.githubusercontent.com/40900195/55618685-08bc2a80-578f-11e9-9bb2-208cc4c79701.png">
 1. The game is an infinite loop, which means there is no end of the game, the aim is to survive as long as possible and defeat as many waves of alien invaders as you can.
-![no-end](https://user-images.githubusercontent.com/40900195/55618901-8d0ead80-578f-11e9-88ef-822d5457354f.png)
+<img width="1676" alt="Screenshot 2019-04-05 at 10 30 03" src="https://user-images.githubusercontent.com/40900195/55618901-8d0ead80-578f-11e9-88ef-822d5457354f.png">
 
-##### Process
-
+## Process
 1. To start creating the game I used JavaScript to create a grid, by setting a value for width and then creating div elements while the index value was less than width * width.
 1. I then pushed these divs to an empty array and then appended them to the grid game container in my html.
 1. I then created an aliens array, which included the index values of the squares on the grid, to apply the alien class to these specific squares on the grid.
@@ -73,24 +65,23 @@ AKA How it may be used.
 1. If all of the aliens have been killed, which means the alien array has a length of 0, the level has been one.
 1. Once a level has been won, this then displays a 'Next Level' button, which when pressed, allows the player to start the next level, and resets the score, lives and timer values.
 
-### Challenges & Achievements
+### Challenges
 
 As this was my first JavaScript project I encountered many difficulties:
 
-* All of the visuals were created in JavaScript so did not exist on page load
-* I chose this project so I could practice setIntervals as I needed to cement my learning, and this project contained many and it was difficult to manage so many which were running at once, but at different times
+- All of the visuals were created in JavaScript so did not exist on page load
+- I chose this project so I could practice setIntervals as I needed to cement my learning, and this project contained many and it was difficult to manage so many which were running at once, but at different times
 
+### Wins
 During this project I had multiple wins, these include:
-
 * I have learnt so much during this project and I am really happy with what I have managed to achieve with my new JavaScript knowledge
 * I thought the extra design features, such as the flash on game load and the 'Start Game' button added to the user experience of the game
 
-## Future enhancements
-
-* To create a leaderboard using localStorage
-* To apply different aliens within the game, so they are not all of the same type
-* To set additional aliens at different point values
-* To add in the UFO which comes into the game play at random intervals
-* To add in the barricades and recreate the original arcade game as closely as possible
-* When levels are increased, to maintain points and time values from the previous levels
-  
+## Future features
+There are a few features I would like to add going forward:
+* I would like to create a leaderboard using localStorage
+* I would like to apply different aliens within the game, so they are not all of the same type
+* With the additional aliens, I would like to set them at different point values
+* Another addition I would like to apply is the UFO which comes into the game play at random intervals
+* At some point I would also like to add in the barricades, to recreate the original arcade game as closely as possible
+* When the levels are increased, I want to maintain the points and time values from the previous levels
