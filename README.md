@@ -32,11 +32,20 @@ The app aimed to fully replicate the original arcade game and built purely with 
 
 #### Development Process
 
-How I went about it
+1. To start creating the game I used JavaScript to create a grid, by setting a value for width and then creating div elements while the index value was less than width * width.
+1. I then pushed these divs to an empty array and then appended them to the grid game container in my html.
+1. I then created an aliens array, which included the index values of the squares on the grid, to apply the alien class to these specific squares on the grid.
+1. I created displays for score, time, lives and level which update when the values are altered.
+1. I created keydown event listeners to allow the player to move and fire when the corresponding keys are pressed.
+1. I then created a set interval, which ran through a moves array, to move the aliens right, down, left and down. It loops over this array and then continues to move the aliens, until they reach the last row.
+1. The aliens fire by using Math.random to choose a random index within the aliens array to choose which alien should fire back.
+1. If the player is hit by alien fire, the lives value is reduced by one.
+1. When the aliens reach the last row or when the player has 0 lives, this calls the game end function which clears the grid of aliens, changes the player to display an exploded turret.
+1. This then displays a 'Play Again' button, which allows the player to restart the game from level 1 and resets the score, timer, lives and levels values.
+1. If all of the aliens have been killed, which means the alien array has a length of 0, the level has been one.
+1. Once a level has been won, this then displays a 'Next Level' button, which when pressed, allows the player to start the next level, and resets the score, lives and timer values.
 
 #### Functionality
-
-AKA How it may be used.
 
 ##### Controls
 
@@ -57,21 +66,6 @@ AKA How it may be used.
 ![next-level](https://user-images.githubusercontent.com/40900195/55618685-08bc2a80-578f-11e9-9bb2-208cc4c79701.png)
 1. The game is an infinite loop, which means there is no end of the game, the aim is to survive as long as possible and defeat as many waves of alien invaders as you can.
 ![no-end](https://user-images.githubusercontent.com/40900195/55618901-8d0ead80-578f-11e9-88ef-822d5457354f.png)
-
-##### Process
-
-1. To start creating the game I used JavaScript to create a grid, by setting a value for width and then creating div elements while the index value was less than width * width.
-1. I then pushed these divs to an empty array and then appended them to the grid game container in my html.
-1. I then created an aliens array, which included the index values of the squares on the grid, to apply the alien class to these specific squares on the grid.
-1. I created displays for score, time, lives and level which update when the values are altered.
-1. I created keydown event listeners to allow the player to move and fire when the corresponding keys are pressed.
-1. I then created a set interval, which ran through a moves array, to move the aliens right, down, left and down. It loops over this array and then continues to move the aliens, until they reach the last row.
-1. The aliens fire by using Math.random to choose a random index within the aliens array to choose which alien should fire back.
-1. If the player is hit by alien fire, the lives value is reduced by one.
-1. When the aliens reach the last row or when the player has 0 lives, this calls the game end function which clears the grid of aliens, changes the player to display an exploded turret.
-1. This then displays a 'Play Again' button, which allows the player to restart the game from level 1 and resets the score, timer, lives and levels values.
-1. If all of the aliens have been killed, which means the alien array has a length of 0, the level has been one.
-1. Once a level has been won, this then displays a 'Next Level' button, which when pressed, allows the player to start the next level, and resets the score, lives and timer values.
 
 ### Challenges & Achievements
 
