@@ -21,7 +21,7 @@ A faithful recreation of the original arcade game Space Invaders, built with Jav
 
 The app aimed to fully replicate the original arcade game and built purely with vanilla Javascript.
 
-[**Link to live site**](https://sammii-hk.github.io/space-invaders/)
+[**Link to live site**](https://sammii.dev/space-invaders/)
 
 ![image](https://user-images.githubusercontent.com/40900195/55617060-34d5ac80-578b-11e9-9278-06a6a0485bc5.png)
 
